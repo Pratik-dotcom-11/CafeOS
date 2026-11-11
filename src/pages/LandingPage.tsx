@@ -579,22 +579,22 @@ export const LandingPage: React.FC = () => {
                 </NavLink>
               </div>
 
-              {/* Operational Tools: POS Cashier right beside Kitchen KDS */}
+              {/* Operational Tools: Kitchen KDS & POS Cashier right beside each other */}
               <div className="flex items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-md sm:max-w-none">
                 <NavLink
-                  to="/dashboard/pos"
-                  className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent/60 transition-all flex items-center justify-center gap-1.5 btn-press"
-                >
-                  <ShoppingBag className="w-4 h-4 text-orange-600 shrink-0" />
-                  <span>POS Cashier</span>
-                </NavLink>
-
-                <NavLink
                   to="/kitchen"
-                  className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-stone-900 text-orange-400 font-extrabold text-xs shadow-warm flex items-center justify-center gap-1.5 border border-orange-500/30 hover:bg-black transition-all btn-press"
+                  className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-stone-900 text-orange-400 font-extrabold text-xs uppercase tracking-wider shadow-warm flex items-center justify-center gap-2 border border-orange-500/30 hover:border-orange-500/60 hover:bg-black transition-all btn-press"
                 >
                   <ChefHat className="w-4 h-4 text-orange-400 shrink-0" />
                   <span>Kitchen KDS</span>
+                </NavLink>
+
+                <NavLink
+                  to="/dashboard/pos"
+                  className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent/60 transition-all flex items-center justify-center gap-2 btn-press"
+                >
+                  <ShoppingBag className="w-4 h-4 text-orange-600 shrink-0" />
+                  <span>POS Cashier</span>
                 </NavLink>
               </div>
             </motion.div>
