@@ -247,7 +247,7 @@ export const OrdersPage: React.FC = () => {
                       className="p-3.5 rounded-2xl bg-cafe-light dark:bg-stone-800/60 border border-cafe-border/80 dark:border-stone-700 hover:shadow-warm-md cursor-pointer transition-all space-y-2.5 card-interactive hover:-translate-y-1"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-extrabold text-xs text-cafe-primary dark:text-cafe-cream">
+                        <span className="font-display font-bold text-xs text-cafe-primary dark:text-cafe-cream">
                           {ord.orderNumber}
                         </span>
                         <span className="text-[10px] text-cafe-muted">
@@ -278,7 +278,7 @@ export const OrdersPage: React.FC = () => {
                       </div>
 
                       <div className="flex items-center justify-between pt-1">
-                        <span className="font-extrabold text-xs text-cafe-primary dark:text-cafe-cream">
+                        <span className="font-display font-bold text-xs text-cafe-primary dark:text-cafe-cream">
                           {formatCurrency(ord.total, restaurant.currencySymbol)}
                         </span>
                         {/* Quick Advance Button */}
@@ -288,7 +288,7 @@ export const OrdersPage: React.FC = () => {
                               e.stopPropagation();
                               updateOrderStatus(ord.id, 'accepted');
                             }}
-                            className="px-2.5 py-1 rounded-lg bg-blue-600 text-white text-[10px] font-bold"
+                            className="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold btn-press shadow-xs"
                           >
                             Accept &rarr;
                           </button>
@@ -299,7 +299,7 @@ export const OrdersPage: React.FC = () => {
                               e.stopPropagation();
                               updateOrderStatus(ord.id, 'preparing');
                             }}
-                            className="px-2.5 py-1 rounded-lg bg-orange-600 text-white text-[10px] font-bold"
+                            className="px-2.5 py-1 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-[10px] font-bold btn-press shadow-xs"
                           >
                             Start Cook &rarr;
                           </button>
@@ -310,7 +310,7 @@ export const OrdersPage: React.FC = () => {
                               e.stopPropagation();
                               updateOrderStatus(ord.id, 'ready');
                             }}
-                            className="px-2.5 py-1 rounded-lg bg-emerald-600 text-white text-[10px] font-bold"
+                            className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold btn-press shadow-xs"
                           >
                             Mark Ready &rarr;
                           </button>

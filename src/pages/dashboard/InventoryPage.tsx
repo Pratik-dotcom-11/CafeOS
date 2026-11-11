@@ -604,8 +604,17 @@ export const InventoryPage: React.FC = () => {
                           {ing.supplier?.name || 'Verified Indian Mandi'}
                         </td>
                         <td className="py-4 px-4">
-                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusStyles} capitalize`}>
-                            {ing.status?.replace('-', ' ')}
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border ${statusStyles} capitalize shadow-xs`}>
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full ${
+                                ing.status === 'low-stock'
+                                  ? 'bg-amber-500 animate-pulse'
+                                  : ing.status === 'out-of-stock'
+                                  ? 'bg-rose-500'
+                                  : 'bg-emerald-500'
+                              }`}
+                            />
+                            <span>{ing.status?.replace('-', ' ')}</span>
                           </span>
                         </td>
                         <td className="py-4 px-6 text-right">

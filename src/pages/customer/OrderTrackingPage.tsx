@@ -534,17 +534,22 @@ export const OrderTrackingPage: React.FC = () => {
             </span>
           </div>
 
-          <div className="space-y-6 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-cafe-sand before:z-0">
+          <div className="space-y-6 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-gradient-to-b before:from-emerald-500 before:via-cafe-accent before:to-cafe-sand before:rounded-full before:z-0">
             {timelineSteps.map((step) => {
               const Icon = step.icon;
               return (
-                <div key={step.key} className="relative z-10 flex items-start gap-4">
+                <div
+                  key={step.key}
+                  className={`relative z-10 flex items-start gap-4 p-2 rounded-2xl transition-all ${
+                    step.isCurrent ? 'bg-amber-50/60 dark:bg-amber-950/20' : ''
+                  }`}
+                >
                   <div
                     className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 border transition-all ${
                       step.isCurrent
-                        ? 'bg-cafe-accent text-white border-cafe-accent shadow-warm ring-4 ring-cafe-accent/20 animate-pulse'
+                        ? 'bg-cafe-accent text-white border-cafe-accent shadow-warm-md ring-4 ring-cafe-accent/25 animate-pulse'
                         : step.isDone
-                        ? 'bg-emerald-600 text-white border-emerald-600'
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
                         : 'bg-cafe-light text-cafe-muted border-cafe-border'
                     }`}
                   >
@@ -556,7 +561,7 @@ export const OrderTrackingPage: React.FC = () => {
                       <p
                         className={`font-black text-sm ${
                           step.isCurrent
-                            ? 'text-cafe-accent'
+                            ? 'text-cafe-accent font-display'
                             : step.isDone
                             ? 'text-cafe-primary'
                             : 'text-cafe-muted'
@@ -565,15 +570,15 @@ export const OrderTrackingPage: React.FC = () => {
                         {step.label}
                       </p>
                       {step.isCurrent && (
-                        <span className="text-[10px] font-black text-cafe-accent bg-cafe-accent/15 px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] font-black text-cafe-accent bg-cafe-accent/15 border border-cafe-accent/20 px-2.5 py-0.5 rounded-full animate-pulse">
                           Current Stage
                         </span>
                       )}
                       {step.isDone && !step.isCurrent && (
-                        <span className="text-[10px] font-bold text-emerald-600">Completed</span>
+                        <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Completed</span>
                       )}
                     </div>
-                    <p className="text-xs text-cafe-muted mt-0.5">{step.desc}</p>
+                    <p className="text-xs text-cafe-muted mt-0.5 font-normal">{step.desc}</p>
                   </div>
                 </div>
               );

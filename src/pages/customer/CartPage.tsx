@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag,
   Plus,
@@ -214,132 +215,138 @@ export const CartPage: React.FC = () => {
 
       {/* Cart Items List */}
       <div className="space-y-3">
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className="p-4 rounded-3xl bg-white border border-cafe-border shadow-warm hover:shadow-warm-md card-interactive hover:-translate-y-0.5 transition-all flex flex-col gap-3"
-          >
-            <div className="flex items-start gap-3.5">
-              <SafeImage
-                src={item.product.image}
-                alt={item.product.name}
-                category={item.product.category}
-                className="w-16 h-16 rounded-2xl object-cover shrink-0 ring-1 ring-cafe-border"
-              />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-1.5">
-                    {item.product.isVeg ? (
-                      <span className="w-3 h-3 border border-emerald-600 rounded-sm flex items-center justify-center p-0.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                      </span>
-                    ) : (
-                      <span className="w-3 h-3 border border-rose-700 rounded-sm flex items-center justify-center p-0.5">
-                        <span className="w-0 h-0 border-l-[2.5px] border-l-transparent border-r-[2.5px] border-r-transparent border-b-[5px] border-b-rose-700" />
-                      </span>
-                    )}
-                    <h3 className="font-extrabold text-sm text-cafe-primary truncate">
-                      {item.product.name}
-                    </h3>
+        <AnimatePresence mode="popLayout">
+          {cart.map((item) => (
+            <motion.div
+              key={item.id}
+              layout
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+              className="p-4 rounded-3xl bg-white border border-cafe-border hover:border-cafe-accent/40 shadow-warm hover:shadow-warm-md card-interactive hover:-translate-y-0.5 transition-all flex flex-col gap-3"
+            >
+              <div className="flex items-start gap-3.5">
+                <SafeImage
+                  src={item.product.image}
+                  alt={item.product.name}
+                  category={item.product.category}
+                  className="w-16 h-16 rounded-2xl object-cover shrink-0 ring-1 ring-cafe-border"
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      {item.product.isVeg ? (
+                        <span className="w-3 h-3 border border-emerald-600 rounded-sm flex items-center justify-center p-0.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                        </span>
+                      ) : (
+                        <span className="w-3 h-3 border border-rose-700 rounded-sm flex items-center justify-center p-0.5">
+                          <span className="w-0 h-0 border-l-[2.5px] border-l-transparent border-r-[2.5px] border-r-transparent border-b-[5px] border-b-rose-700" />
+                        </span>
+                      )}
+                      <h3 className="font-extrabold text-sm text-cafe-primary truncate">
+                        {item.product.name}
+                      </h3>
+                    </div>
+                    <span className="font-display font-extrabold text-sm text-cafe-accent">
+                      {formatCurrency(item.itemTotalPrice, currencySymbol)}
+                    </span>
                   </div>
-                  <span className="font-extrabold text-sm text-cafe-accent">
-                    {formatCurrency(item.itemTotalPrice, currencySymbol)}
-                  </span>
-                </div>
 
-                {/* Modifiers / Variants */}
-                {item.selectedOptions && item.selectedOptions.length > 0 && (
-                  <p className="text-[11px] text-cafe-muted mt-0.5">
-                    {item.selectedOptions.map((o) => o.optionName).join(' • ')}
-                  </p>
-                )}
+                  {/* Modifiers / Variants */}
+                  {item.selectedOptions && item.selectedOptions.length > 0 && (
+                    <p className="text-[11px] text-cafe-muted mt-0.5">
+                      {item.selectedOptions.map((o) => o.optionName).join(' • ')}
+                    </p>
+                  )}
 
-                {/* Item Notes / Instructions */}
-                {item.specialInstructions && editingNoteItemId !== item.id && (
-                  <div className="flex items-center gap-1.5 text-[11px] text-amber-700 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200 mt-1.5">
-                    <MessageSquare className="w-3 h-3 shrink-0" />
-                    <span className="italic truncate">"{item.specialInstructions}"</span>
+                  {/* Item Notes / Instructions */}
+                  {item.specialInstructions && editingNoteItemId !== item.id && (
+                    <div className="flex items-center gap-1.5 text-[11px] text-amber-700 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200 mt-1.5">
+                      <MessageSquare className="w-3 h-3 shrink-0" />
+                      <span className="italic truncate">"{item.specialInstructions}"</span>
+                      <button
+                        type="button"
+                        onClick={() => handleStartEditNote(item.id, item.specialInstructions)}
+                        className="ml-auto text-[10px] font-bold text-amber-800 underline"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Inline Note Editor */}
+                  {editingNoteItemId === item.id ? (
+                    <div className="mt-2 space-y-1.5 bg-cafe-light p-2.5 rounded-xl border border-cafe-border">
+                      <input
+                        type="text"
+                        value={noteInput}
+                        onChange={(e) => setNoteInput(e.target.value)}
+                        placeholder="e.g. extra spicy, crispy naan, less oil..."
+                        className="w-full px-2.5 py-1 text-xs bg-white border border-cafe-border rounded-lg focus:outline-none focus:border-cafe-accent"
+                      />
+                      <div className="flex justify-end gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setEditingNoteItemId(null)}
+                          className="px-2 py-0.5 text-[10px] font-bold text-cafe-muted hover:text-cafe-primary"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleSaveNote(item.id)}
+                          className="px-2.5 py-0.5 text-[10px] font-bold bg-cafe-accent text-white rounded-md shadow-sm"
+                        >
+                          Save Note
+                        </button>
+                      </div>
+                    </div>
+                  ) : !item.specialInstructions ? (
                     <button
                       type="button"
-                      onClick={() => handleStartEditNote(item.id, item.specialInstructions)}
-                      className="ml-auto text-[10px] font-bold text-amber-800 underline"
+                      onClick={() => handleStartEditNote(item.id)}
+                      className="text-[11px] text-cafe-muted hover:text-cafe-accent font-semibold flex items-center gap-1 mt-1 transition-colors"
                     >
-                      Edit
+                      <MessageSquare className="w-3 h-3" />
+                      <span>+ Add kitchen note</span>
                     </button>
-                  </div>
-                )}
+                  ) : null}
 
-                {/* Inline Note Editor */}
-                {editingNoteItemId === item.id ? (
-                  <div className="mt-2 space-y-1.5 bg-cafe-light p-2.5 rounded-xl border border-cafe-border">
-                    <input
-                      type="text"
-                      value={noteInput}
-                      onChange={(e) => setNoteInput(e.target.value)}
-                      placeholder="e.g. extra spicy, crispy naan, less oil..."
-                      className="w-full px-2.5 py-1 text-xs bg-white border border-cafe-border rounded-lg focus:outline-none focus:border-cafe-accent"
-                    />
-                    <div className="flex justify-end gap-1.5">
+                  {/* Quantity Controls & Remove */}
+                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-cafe-border/50">
+                    <button
+                      type="button"
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-xs text-rose-500 hover:text-rose-700 font-semibold flex items-center gap-1 transition-colors btn-press"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                      <span>Remove</span>
+                    </button>
+
+                    <div className="flex items-center gap-2.5 bg-cafe-light border border-cafe-border px-2.5 py-1 rounded-xl">
                       <button
                         type="button"
-                        onClick={() => setEditingNoteItemId(null)}
-                        className="px-2 py-0.5 text-[10px] font-bold text-cafe-muted hover:text-cafe-primary"
+                        onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                        className="p-0.5 text-cafe-muted hover:text-cafe-primary transition-colors btn-press"
                       >
-                        Cancel
+                        <Minus className="w-3.5 h-3.5" />
                       </button>
+                      <span className="font-display font-bold text-xs w-4 text-center">{item.quantity}</span>
                       <button
                         type="button"
-                        onClick={() => handleSaveNote(item.id)}
-                        className="px-2.5 py-0.5 text-[10px] font-bold bg-cafe-accent text-white rounded-md shadow-sm"
+                        onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                        className="p-0.5 text-cafe-muted hover:text-cafe-primary transition-colors btn-press"
                       >
-                        Save Note
+                        <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
-                ) : !item.specialInstructions ? (
-                  <button
-                    type="button"
-                    onClick={() => handleStartEditNote(item.id)}
-                    className="text-[11px] text-cafe-muted hover:text-cafe-accent font-semibold flex items-center gap-1 mt-1 transition-colors"
-                  >
-                    <MessageSquare className="w-3 h-3" />
-                    <span>+ Add kitchen note</span>
-                  </button>
-                ) : null}
-
-                {/* Quantity Controls & Remove */}
-                <div className="flex items-center justify-between mt-3 pt-2 border-t border-cafe-border/50">
-                  <button
-                    type="button"
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-xs text-rose-500 hover:text-rose-700 font-semibold flex items-center gap-1 transition-colors"
-                  >
-                    <Trash2 className="w-3 h-3" />
-                    <span>Remove</span>
-                  </button>
-
-                  <div className="flex items-center gap-2.5 bg-cafe-light border border-cafe-border px-2.5 py-1 rounded-xl">
-                    <button
-                      type="button"
-                      onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                      className="p-0.5 text-cafe-muted hover:text-cafe-primary transition-colors"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="font-black text-xs w-4 text-center">{item.quantity}</span>
-                    <button
-                      type="button"
-                      onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                      className="p-0.5 text-cafe-muted hover:text-cafe-primary transition-colors"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       {/* Promo Code Input Card */}

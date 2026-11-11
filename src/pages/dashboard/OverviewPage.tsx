@@ -37,6 +37,26 @@ import { formatCurrency, getStatusBadge } from '../../utils/formatters';
 import { analyticsService, CompleteAnalyticsReport } from '../../services/analyticsService';
 import { SafeImage } from '../../components/common/SafeImage';
 
+const overviewContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const overviewItemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export const OverviewPage: React.FC = () => {
   const {
     restaurant,
@@ -225,9 +245,15 @@ export const OverviewPage: React.FC = () => {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <motion.div
+        variants={overviewContainerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+      >
         {/* Today's Revenue */}
         <motion.div
+          variants={overviewItemVariants}
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
           className="bg-white dark:bg-cafe-surface-dark p-5 rounded-3xl border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive"
         >
@@ -261,6 +287,7 @@ export const OverviewPage: React.FC = () => {
 
         {/* Total Orders */}
         <motion.div
+          variants={overviewItemVariants}
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
           className="bg-white dark:bg-cafe-surface-dark p-5 rounded-3xl border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive"
         >
@@ -285,6 +312,7 @@ export const OverviewPage: React.FC = () => {
 
         {/* Average Order Value */}
         <motion.div
+          variants={overviewItemVariants}
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
           className="bg-white dark:bg-cafe-surface-dark p-5 rounded-3xl border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive"
         >
@@ -308,6 +336,7 @@ export const OverviewPage: React.FC = () => {
 
         {/* Table Occupancy & Low stock */}
         <motion.div
+          variants={overviewItemVariants}
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
           className="bg-white dark:bg-cafe-surface-dark p-5 rounded-3xl border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive"
         >
@@ -334,7 +363,7 @@ export const OverviewPage: React.FC = () => {
             </p>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Main Charts Section: Revenue Analytics & Order Velocity */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

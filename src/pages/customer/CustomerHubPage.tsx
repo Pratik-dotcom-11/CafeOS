@@ -39,6 +39,26 @@ import {
   RecentlyViewedRestaurant,
 } from '../../utils/customerUtils';
 
+const hubContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const hubCardVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export const CustomerHubPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, profile, isAuthenticated } = useAuth();
@@ -510,8 +530,18 @@ export const CustomerHubPage: React.FC = () => {
             {[1, 2, 3].map((n) => (
               <div
                 key={n}
-                className="h-72 rounded-3xl bg-white border border-cafe-border animate-pulse p-4"
-              />
+                className="rounded-3xl bg-white border border-cafe-border p-4 space-y-4 animate-pulse shadow-warm-sm"
+              >
+                <div className="h-44 w-full bg-cafe-sand/40 rounded-2xl" />
+                <div className="space-y-2">
+                  <div className="h-4 w-2/3 bg-cafe-sand/50 rounded-lg" />
+                  <div className="h-3 w-1/2 bg-cafe-sand/30 rounded-lg" />
+                </div>
+                <div className="pt-3 border-t border-cafe-border/50 flex justify-between items-center">
+                  <div className="h-4 w-16 bg-cafe-sand/40 rounded-lg" />
+                  <div className="h-8 w-24 bg-cafe-sand/60 rounded-xl" />
+                </div>
+              </div>
             ))}
           </div>
         ) : errorMsg ? (
@@ -519,7 +549,7 @@ export const CustomerHubPage: React.FC = () => {
             <p className="text-xs font-bold text-rose-700">{errorMsg}</p>
             <button
               onClick={() => window.location.reload()}
-              className="px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-warm"
+              className="px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-warm btn-press"
             >
               Retry
             </button>
@@ -536,7 +566,12 @@ export const CustomerHubPage: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            variants={hubContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {filteredRestaurants.slice(0, 6).map((rest) => {
               const isFav = favoriteRestaurantIds.has(rest.id);
               const openStatus = isRestaurantOpen(rest.opening_hours, rest.is_active);
@@ -544,8 +579,9 @@ export const CustomerHubPage: React.FC = () => {
               return (
                 <motion.div
                   key={rest.id}
+                  variants={hubCardVariants}
                   whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                  className="bg-white rounded-3xl border border-cafe-border overflow-hidden shadow-warm hover:shadow-warm-lg transition-all group flex flex-col justify-between card-interactive"
+                  className="bg-white rounded-3xl border border-cafe-border hover:border-cafe-accent/50 overflow-hidden shadow-warm hover:shadow-warm-lg transition-all group flex flex-col justify-between card-interactive"
                 >
                   <div>
                     {/* Header Banner / Image */}
@@ -558,7 +594,7 @@ export const CustomerHubPage: React.FC = () => {
                         }
                         fallbackSrc="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80"
                         alt={rest.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
 
@@ -569,9 +605,9 @@ export const CustomerHubPage: React.FC = () => {
                           e.preventDefault();
                           toggleFavoriteRestaurant(rest.id);
                         }}
-                        className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all ${
+                        className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all active:scale-90 ${
                           isFav
-                            ? 'bg-rose-500 text-white'
+                            ? 'bg-rose-500 text-white shadow-sm ring-2 ring-rose-400/40'
                             : 'bg-white/80 text-cafe-primary hover:bg-white'
                         }`}
                         title="Bookmark restaurant"
@@ -582,7 +618,7 @@ export const CustomerHubPage: React.FC = () => {
                       {/* Open/Closed Badge */}
                       <div className="absolute top-3 left-3">
                         <span
-                          className={`px-2.5 py-1 rounded-full text-[11px] font-black flex items-center gap-1 shadow-sm ${
+                          className={`px-2.5 py-1 rounded-full text-[11px] font-black flex items-center gap-1.5 shadow-sm ${
                             openStatus.isOpen
                               ? 'bg-emerald-600 text-white'
                               : 'bg-stone-800 text-stone-200'
@@ -599,7 +635,7 @@ export const CustomerHubPage: React.FC = () => {
 
                       {/* Rating & Location Tag */}
                       <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                        <span className="px-2.5 py-1 rounded-full bg-amber-500 text-white text-xs font-black flex items-center gap-1 shadow-sm">
+                        <span className="px-2.5 py-1 rounded-full bg-amber-500 text-white text-xs font-display font-bold flex items-center gap-1 shadow-sm">
                           <Star className="w-3.5 h-3.5 fill-white" />
                           <span>{Number(rest.rating) || 4.8}</span>
                         </span>
@@ -662,7 +698,7 @@ export const CustomerHubPage: React.FC = () => {
                     </NavLink>
                     <NavLink
                       to={`/customer/menu/${rest.id}`}
-                      className="px-4 py-2 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-bold shadow-warm transition-all flex items-center gap-1.5 active:scale-95 btn-press"
+                      className="px-4 py-2 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-bold shadow-warm transition-all flex items-center gap-1.5 btn-press"
                     >
                       <span>Explore Menu</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -671,7 +707,7 @@ export const CustomerHubPage: React.FC = () => {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         )}
       </section>
 
@@ -692,7 +728,12 @@ export const CustomerHubPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <motion.div
+            variants={hubContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
             {featuredProducts.map((p) => {
               const isFav = favoriteProductIds.has(p.id);
               const targetRest = restaurants[0] || {
@@ -706,8 +747,9 @@ export const CustomerHubPage: React.FC = () => {
               return (
                 <motion.div
                   key={p.id}
+                  variants={hubCardVariants}
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="p-4 rounded-3xl bg-white border border-cafe-border shadow-warm hover:shadow-warm-md transition-all flex gap-4 items-center justify-between card-interactive"
+                  className="p-4 rounded-3xl bg-white border border-cafe-border hover:border-cafe-accent/40 shadow-warm hover:shadow-warm-md transition-all flex gap-4 items-center justify-between card-interactive"
                 >
                   <div className="space-y-1.5 flex-1 pr-2">
                     <div className="flex items-center gap-1.5">
@@ -793,7 +835,7 @@ export const CustomerHubPage: React.FC = () => {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </section>
       )}
 

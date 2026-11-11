@@ -152,9 +152,9 @@ export const AdminLayout: React.FC = () => {
                   onClick={() => setSidebarOpen(false)}
                   className={({ isActive: navActive }) => {
                     const active = item.exact ? location.pathname === item.to : navActive;
-                    return `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all group ${
+                    return `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all group btn-press ${
                       active
-                        ? 'bg-cafe-primary text-white shadow-warm dark:bg-cafe-accent dark:text-white'
+                        ? 'bg-cafe-primary text-white shadow-warm dark:bg-cafe-accent dark:text-white font-semibold'
                         : 'text-cafe-primary/80 dark:text-stone-300 hover:bg-cafe-cream/60 dark:hover:bg-stone-800/60'
                     }`;
                   }}
