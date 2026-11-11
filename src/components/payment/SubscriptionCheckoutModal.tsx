@@ -476,3 +476,4 @@ export const SubscriptionCheckoutModal: React.FC<SubscriptionCheckoutModalProps>
     </div>
   );
 };
+
