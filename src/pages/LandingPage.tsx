@@ -31,7 +31,9 @@ import {
   Award,
   Globe,
   LogOut,
-  User
+  User,
+  Menu,
+  X
 } from 'lucide-react';
 import { useCafe } from '../context/CafeContext';
 import { useAuth } from '../context/AuthContext';
@@ -64,6 +66,7 @@ export const LandingPage: React.FC = () => {
   const { user, profile, isAuthenticated, signOut, workspaces } = useAuth();
   const [activeTab, setActiveTab] = useState<'pos' | 'qr' | 'kds' | 'inventory' | 'admin'>('pos');
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isStaff = (Array.isArray(workspaces) && workspaces.length > 0) || Boolean(profile?.is_super_admin);
 
@@ -360,27 +363,29 @@ export const LandingPage: React.FC = () => {
           </nav>
 
           {/* Action CTAs: Direct access to Customer Portal, Auth, and Dashboard */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <NavLink
               to={isAuthenticated ? '/customer' : '/customer/login'}
-              className="text-xs font-extrabold text-cafe-accent hover:text-cafe-primary dark:text-amber-400 dark:hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-cafe-sand/50 flex items-center gap-1.5 border border-cafe-accent/30 shadow-sm btn-press"
+              className="text-xs font-extrabold text-cafe-accent hover:text-cafe-primary dark:text-amber-400 dark:hover:text-white transition-colors px-2.5 sm:px-3 py-2 rounded-xl hover:bg-cafe-sand/50 flex items-center gap-1.5 border border-cafe-accent/30 shadow-sm btn-press"
             >
-              <Utensils className="w-3.5 h-3.5" />
-              <span>Customer Portal</span>
+              <Utensils className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Customer Portal</span>
+              <span className="sm:hidden">Customer</span>
             </NavLink>
 
             <NavLink
               to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
-              className="relative group px-4 sm:px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cafe-accent to-amber-600 hover:from-amber-600 hover:to-cafe-accent text-white text-xs font-black shadow-warm hover:shadow-warm-md transition-all flex items-center gap-2 btn-press"
+              className="relative group px-3 sm:px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cafe-accent to-amber-600 hover:from-amber-600 hover:to-cafe-accent text-white text-xs font-black shadow-warm hover:shadow-warm-md transition-all flex items-center gap-1.5 sm:gap-2 btn-press"
             >
-              <Store className="w-3.5 h-3.5" />
-              <span>Restaurant Portal</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <Store className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Restaurant Portal</span>
+              <span className="sm:hidden">Restaurant</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform hidden sm:inline" />
             </NavLink>
 
             {isAuthenticated && (
               <>
-                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cafe-sand/50 text-[11px] font-bold text-cafe-primary truncate max-w-[140px]">
+                <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cafe-sand/50 text-[11px] font-bold text-cafe-primary truncate max-w-[140px]">
                   <User className="w-3.5 h-3.5 text-cafe-accent shrink-0" />
                   <span className="truncate">{user?.email?.split('@')[0]}</span>
                 </div>
@@ -395,8 +400,107 @@ export const LandingPage: React.FC = () => {
                 </button>
               </>
             )}
+
+            {/* Mobile Hamburger Menu Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 rounded-xl text-cafe-primary dark:text-white hover:bg-cafe-sand/50 transition-colors cursor-pointer"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5 text-cafe-accent" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25 }}
+              className="lg:hidden border-t border-cafe-border dark:border-stone-800 bg-white/98 dark:bg-stone-900/98 backdrop-blur-xl px-4 py-4 space-y-4 shadow-xl overflow-hidden"
+            >
+              <div className="grid grid-cols-2 gap-2 text-xs font-bold text-cafe-primary dark:text-stone-200">
+                <a
+                  href="#portals"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2.5 rounded-xl bg-cafe-sand/40 dark:bg-stone-800 hover:bg-cafe-accent/15 transition-colors flex items-center gap-2"
+                >
+                  <Store className="w-4 h-4 text-cafe-accent" />
+                  <span>Portals</span>
+                </a>
+                <a
+                  href="#solutions"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2.5 rounded-xl bg-cafe-sand/40 dark:bg-stone-800 hover:bg-cafe-accent/15 transition-colors flex items-center gap-2"
+                >
+                  <Zap className="w-4 h-4 text-amber-600" />
+                  <span>Engines</span>
+                </a>
+                <a
+                  href="#culinary"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2.5 rounded-xl bg-cafe-sand/40 dark:bg-stone-800 hover:bg-cafe-accent/15 transition-colors flex items-center gap-2"
+                >
+                  <ChefHat className="w-4 h-4 text-orange-600" />
+                  <span>Culinary OS</span>
+                </a>
+                <a
+                  href="#pricing"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2.5 rounded-xl bg-cafe-sand/40 dark:bg-stone-800 hover:bg-cafe-accent/15 transition-colors flex items-center gap-2"
+                >
+                  <IndianRupee className="w-4 h-4 text-emerald-600" />
+                  <span>Pricing</span>
+                </a>
+              </div>
+
+              {/* Mobile Quick Action Links */}
+              <div className="space-y-2 pt-2 border-t border-cafe-border/60 dark:border-stone-800">
+                <p className="text-[10px] font-black uppercase tracking-wider text-cafe-muted">
+                  Quick Direct Access
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <NavLink
+                    to={isAuthenticated ? '/customer' : '/customer/login'}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 rounded-xl bg-rose-500/10 text-rose-700 dark:text-rose-400 font-extrabold text-xs flex items-center gap-2 border border-rose-200 dark:border-rose-900"
+                  >
+                    <Utensils className="w-4 h-4" />
+                    <span>Customer App</span>
+                  </NavLink>
+                  <NavLink
+                    to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-400 font-extrabold text-xs flex items-center gap-2 border border-amber-200 dark:border-amber-900"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>Admin HQ</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/pos"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 rounded-xl bg-orange-500/10 text-orange-700 dark:text-orange-400 font-extrabold text-xs flex items-center gap-2 border border-orange-200 dark:border-orange-900"
+                  >
+                    <ShoppingBag className="w-4 h-4" />
+                    <span>POS Terminal</span>
+                  </NavLink>
+                  <NavLink
+                    to="/kitchen"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 rounded-xl bg-blue-500/10 text-blue-700 dark:text-blue-400 font-extrabold text-xs flex items-center gap-2 border border-blue-200 dark:border-blue-900"
+                  >
+                    <ChefHat className="w-4 h-4" />
+                    <span>Kitchen KDS</span>
+                  </NavLink>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* 2. HERO SECTION WITH RICH VISUAL SHOWCASE */}
@@ -548,7 +652,7 @@ export const LandingPage: React.FC = () => {
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-              className="absolute -top-4 -right-4 sm:-right-6 p-4 rounded-2xl bg-white/95 dark:bg-stone-900/95 backdrop-blur-md shadow-warm-lg border border-cafe-border dark:border-stone-700 max-w-[210px]"
+              className="absolute top-2 right-2 sm:-top-4 sm:-right-6 p-3 sm:p-4 rounded-2xl bg-white/95 dark:bg-stone-900/95 backdrop-blur-md shadow-warm-lg border border-cafe-border dark:border-stone-700 max-w-[190px] sm:max-w-[210px] z-10"
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
@@ -568,7 +672,7 @@ export const LandingPage: React.FC = () => {
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 1 }}
-              className="absolute -bottom-6 -left-4 sm:-left-6 p-4 rounded-2xl bg-white/95 dark:bg-stone-900/95 backdrop-blur-md shadow-warm-lg border border-cafe-border dark:border-stone-700 max-w-[230px]"
+              className="absolute bottom-2 left-2 sm:-bottom-6 sm:-left-6 p-3 sm:p-4 rounded-2xl bg-white/95 dark:bg-stone-900/95 backdrop-blur-md shadow-warm-lg border border-cafe-border dark:border-stone-700 max-w-[200px] sm:max-w-[230px] z-10"
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[10px] font-black uppercase tracking-wider text-cafe-muted">

@@ -220,6 +220,33 @@ export const KitchenLayout: React.FC = () => {
         </div>
       </header>
 
+      {/* Mobile Station Filters Ribbon */}
+      <div className="flex lg:hidden overflow-x-auto py-2 px-3 gap-1.5 bg-[#161412] border-b border-[#2C2825] no-scrollbar">
+        {[
+          { id: 'all', label: 'All Stations', icon: Filter },
+          { id: 'biryani_curry', label: 'Dum & Curries', icon: Flame },
+          { id: 'tandoor', label: 'Tandoor & Starters', icon: Flame },
+          { id: 'beverages', label: 'Chai & Cold Bar', icon: Coffee },
+        ].map((st) => {
+          const Icon = st.icon;
+          const active = activeStation === st.id;
+          return (
+            <button
+              key={st.id}
+              onClick={() => setActiveStation(st.id)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                active
+                  ? 'bg-orange-600 text-white shadow-sm ring-1 ring-orange-400'
+                  : 'bg-[#25211E] text-stone-400 border border-[#36302B] hover:text-white'
+              }`}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              <span>{st.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
       {/* Main KDS Board Viewport */}
       <main className="flex-1 p-3 sm:p-5 overflow-y-auto">
         <Outlet

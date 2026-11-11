@@ -378,7 +378,7 @@ export const CustomerPortalLayout: React.FC = () => {
       </header>
 
       {/* 2. MAIN OUTLET BODY WITH SMOOTH PAGE TRANSITION */}
-      <main className="flex-1 max-w-7xl w-full mx-auto pb-24 md:pb-12">
+      <main className="flex-1 max-w-7xl w-full mx-auto pb-[max(6.5rem,calc(5rem+env(safe-area-inset-bottom)))] md:pb-12">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -393,7 +393,7 @@ export const CustomerPortalLayout: React.FC = () => {
       </main>
 
       {/* 3. MOBILE BOTTOM NAVIGATION DOCK */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-lg border-t border-cafe-border/80 z-30 px-3 py-1.5 shadow-warm-lg">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-lg border-t border-cafe-border/80 z-30 px-3 pt-1.5 pb-[max(0.6rem,env(safe-area-inset-bottom))] shadow-warm-lg">
         <div className="grid grid-cols-5 items-center text-center">
           <NavLink
             to="/customer"
