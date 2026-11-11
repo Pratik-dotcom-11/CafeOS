@@ -38,6 +38,27 @@ import { useAuth } from '../context/AuthContext';
 import { formatCurrency } from '../utils/formatters';
 import { CafeLogo } from '../components/common/CafeLogo';
 
+// Animation variants for smooth scroll-triggered reveals and micro-interactions
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export const LandingPage: React.FC = () => {
   const { restaurant } = useCafe();
   const { user, profile, isAuthenticated, signOut, workspaces } = useAuth();
@@ -379,43 +400,58 @@ export const LandingPage: React.FC = () => {
       </header>
 
       {/* 2. HERO SECTION WITH RICH VISUAL SHOWCASE */}
-      <section className="relative pt-12 pb-16 md:pt-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
-        {/* Ambient Warm Gradient Backdrop */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-amber-400/15 via-orange-400/10 to-transparent blur-3xl pointer-events-none -z-10 rounded-full" />
+      <section className="relative pt-12 pb-16 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+        {/* Animated Radiant Ambient Backdrop */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[480px] bg-gradient-to-tr from-amber-500/15 via-orange-500/10 to-rose-500/10 blur-3xl pointer-events-none -z-10 rounded-full animate-pulse-glow" />
+        <div className="absolute top-1/3 right-10 w-72 h-72 bg-gradient-to-bl from-amber-400/10 to-transparent blur-2xl pointer-events-none -z-10 rounded-full" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-orange-400/10 to-transparent blur-2xl pointer-events-none -z-10 rounded-full" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Headline, Narrative & Primary CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
             className="lg:col-span-7 space-y-6 text-center lg:text-left"
           >
             {/* Tag Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cafe-cream dark:bg-stone-800 border border-cafe-accent/30 text-xs font-extrabold text-cafe-primary dark:text-stone-100 shadow-warm-sm">
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cafe-cream/90 dark:bg-stone-800/90 backdrop-blur-sm border border-cafe-accent/30 text-xs font-extrabold text-cafe-primary dark:text-stone-100 shadow-warm-sm"
+            >
               <Sparkles className="w-4 h-4 text-cafe-accent animate-pulse" />
               <span>Next-Gen Indian Restaurant Operating System</span>
-            </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping ml-1" />
+            </motion.div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl font-black text-cafe-primary dark:text-stone-100 tracking-tight leading-[1.12]">
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-6xl font-black text-cafe-primary dark:text-stone-100 tracking-tight leading-[1.12]"
+            >
               The Operating System for{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cafe-accent via-amber-600 to-orange-700">
                 Regal Dining
               </span>{' '}
               & High-Velocity Kitchens.
-            </h1>
+            </motion.h1>
 
             {/* Subhead */}
-            <p className="text-base sm:text-lg text-cafe-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            <motion.p
+              variants={itemVariants}
+              className="text-base sm:text-lg text-cafe-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
+            >
               CafeOS harmonizes multi-restaurant customer discovery, table QR ordering, lightning-fast cashier POS terminals, tactical Kitchen Display Systems (KDS), automated recipe inventory BOM, and seamless Indian UPI/Card payments into one cohesive cloud platform.
-            </p>
+            </motion.p>
 
             {/* Call to Actions: Direct access to Customer Portal & Restaurant Portal */}
-            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <motion.div
+              variants={itemVariants}
+              className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3"
+            >
               <NavLink
                 to={isAuthenticated ? '/customer' : '/customer/login'}
-                className="px-6 py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-md hover:shadow-warm-lg transition-all flex items-center gap-2 group btn-press"
+                className="px-6 py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-md hover:shadow-warm-lg transition-all flex items-center gap-2 group btn-press ring-2 ring-cafe-accent/20"
               >
                 <Utensils className="w-4 h-4 text-white" />
                 <span>Customer Portal</span>
@@ -433,7 +469,7 @@ export const LandingPage: React.FC = () => {
 
               <NavLink
                 to="/dashboard/pos"
-                className="px-4 py-3.5 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent transition-all flex items-center gap-1.5 btn-press"
+                className="px-4 py-3.5 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent/60 transition-all flex items-center gap-1.5 btn-press"
               >
                 <ShoppingBag className="w-4 h-4 text-orange-600" />
                 <span>POS Cashier</span>
@@ -446,10 +482,13 @@ export const LandingPage: React.FC = () => {
                 <ChefHat className="w-4 h-4 text-orange-400" />
                 <span>Kitchen KDS</span>
               </NavLink>
-            </div>
+            </motion.div>
 
             {/* Quick Proof Metrics */}
-            <div className="pt-6 border-t border-cafe-border/70 dark:border-stone-800 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+            <motion.div
+              variants={itemVariants}
+              className="pt-6 border-t border-cafe-border/70 dark:border-stone-800 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left"
+            >
               <div>
                 <p className="text-2xl font-black text-cafe-primary dark:text-stone-100">500+</p>
                 <p className="text-[11px] font-bold text-cafe-muted">Active Indian Bistros</p>
@@ -462,7 +501,7 @@ export const LandingPage: React.FC = () => {
                 <p className="text-2xl font-black text-cafe-accent">₹0</p>
                 <p className="text-[11px] font-bold text-cafe-muted">Proprietary Hardware</p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column: Layered Interactive Visual Showcase with Live Cards */}
@@ -591,44 +630,51 @@ export const LandingPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {coreInterfaces.map((item) => {
             const Icon = item.icon;
             return (
-              <NavLink
-                key={item.title}
-                to={item.to}
-                className="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-md hover:border-cafe-accent/60 transition-all flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-cafe-sand/60 dark:bg-stone-800 text-cafe-primary flex items-center justify-center font-bold group-hover:scale-110 transition-transform">
-                      <Icon className="w-6 h-6 text-cafe-accent" />
+              <motion.div key={item.title} variants={itemVariants}>
+                <NavLink
+                  to={item.to}
+                  className="p-6 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-lg hover:border-cafe-accent/60 transition-all flex flex-col justify-between group h-full hover:-translate-y-1"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-12 h-12 rounded-2xl bg-cafe-sand/60 dark:bg-stone-800 text-cafe-primary flex items-center justify-center font-bold group-hover:scale-110 group-hover:bg-cafe-accent/15 transition-all">
+                        <Icon className="w-6 h-6 text-cafe-accent" />
+                      </div>
+                      <span className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold border ${item.color}`}>
+                        {item.badge}
+                      </span>
                     </div>
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold border ${item.color}`}>
-                      {item.badge}
-                    </span>
+
+                    <h3 className="font-extrabold text-base text-cafe-primary dark:text-white group-hover:text-cafe-accent transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-cafe-muted mt-2 leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
 
-                  <h3 className="font-extrabold text-base text-cafe-primary dark:text-white group-hover:text-cafe-accent transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-cafe-muted mt-2 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-cafe-border/60 dark:border-stone-800 flex items-center justify-between text-xs font-bold text-cafe-accent">
-                  <span className="text-[11px] text-cafe-muted font-normal line-clamp-1">{item.preview}</span>
-                  <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform shrink-0">
-                    <span>Launch</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </NavLink>
+                  <div className="mt-6 pt-4 border-t border-cafe-border/60 dark:border-stone-800 flex items-center justify-between text-xs font-bold text-cafe-accent">
+                    <span className="text-[11px] text-cafe-muted font-normal line-clamp-1">{item.preview}</span>
+                    <span className="flex items-center gap-1 group-hover:translate-x-1.5 transition-transform shrink-0">
+                      <span>Launch</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </NavLink>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </section>
 
       {/* 5. INTERACTIVE PRODUCT SUITES DEEP-DIVE (TABBED SHOWCASE) */}
@@ -662,7 +708,7 @@ export const LandingPage: React.FC = () => {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-5 py-3 rounded-2xl text-xs font-black flex items-center gap-2 shrink-0 transition-all cursor-pointer ${
+                  className={`px-5 py-3 rounded-2xl text-xs font-black flex items-center gap-2 shrink-0 transition-all cursor-pointer btn-press ${
                     active
                       ? 'bg-cafe-primary dark:bg-white text-white dark:text-stone-900 shadow-warm'
                       : 'bg-white dark:bg-stone-800 text-cafe-muted hover:text-cafe-primary dark:hover:text-white border border-cafe-border dark:border-stone-700'
@@ -790,7 +836,13 @@ export const LandingPage: React.FC = () => {
         </div>
 
         {/* 4 Culinary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {[
             {
               title: 'Royal Awadhi Dum Biryanis',
@@ -821,9 +873,10 @@ export const LandingPage: React.FC = () => {
               price: '₹50',
             },
           ].map((dish, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 overflow-hidden shadow-warm hover:shadow-warm-md transition-all group flex flex-col justify-between"
+              variants={itemVariants}
+              className="rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 overflow-hidden shadow-warm hover:shadow-warm-lg transition-all group flex flex-col justify-between hover:-translate-y-1"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -856,9 +909,9 @@ export const LandingPage: React.FC = () => {
                   <span className="text-emerald-600">In Stock</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* 7. TRANSPARENT PRICING TIERS IN INDIAN RUPEES (₹) */}
@@ -903,16 +956,23 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* 4 Pricing Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {pricingPlans.map((plan) => {
               const price = billingCycle === 'monthly' ? plan.priceMonthly : Math.round(plan.priceYearly / 12);
               return (
-                <div
+                <motion.div
                   key={plan.name}
-                  className={`rounded-3xl p-6 flex flex-col justify-between transition-all ${
+                  variants={itemVariants}
+                  className={`rounded-3xl p-6 flex flex-col justify-between transition-all hover:-translate-y-1 ${
                     plan.isPopular
                       ? 'bg-white dark:bg-stone-900 border-2 border-cafe-accent shadow-warm-lg ring-4 ring-cafe-accent/15 relative'
-                      : 'bg-white dark:bg-stone-900 border border-cafe-border dark:border-stone-800 shadow-warm'
+                      : 'bg-white dark:bg-stone-900 border border-cafe-border dark:border-stone-800 shadow-warm hover:shadow-warm-md'
                   }`}
                 >
                   {plan.isPopular && (
@@ -957,7 +1017,7 @@ export const LandingPage: React.FC = () => {
                   <div className="pt-6">
                     <NavLink
                       to="/super-admin/subscriptions"
-                      className={`w-full py-3 rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all ${
+                      className={`w-full py-3 rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all btn-press ${
                         plan.isPopular
                           ? 'bg-cafe-accent hover:bg-cafe-accent-hover text-white shadow-warm'
                           : 'bg-cafe-sand/60 dark:bg-stone-800 text-cafe-primary dark:text-white hover:bg-cafe-sand'
@@ -967,10 +1027,10 @@ export const LandingPage: React.FC = () => {
                       <ArrowRight className="w-3.5 h-3.5" />
                     </NavLink>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -988,8 +1048,14 @@ export const LandingPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 shadow-warm">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-lg hover:border-cafe-accent/40 transition-all hover:-translate-y-1">
             <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-4">
               <Zap className="w-6 h-6 text-cafe-accent" />
             </div>
@@ -997,9 +1063,9 @@ export const LandingPage: React.FC = () => {
             <p className="text-xs text-cafe-muted mt-1 leading-relaxed">
               Zero audio file dependencies. Native browser Web Audio API bells alert kitchen staff instantly when new orders arrive.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 shadow-warm">
+          <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-lg hover:border-emerald-500/40 transition-all hover:-translate-y-1">
             <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-4">
               <QrCode className="w-6 h-6 text-emerald-600" />
             </div>
@@ -1007,9 +1073,9 @@ export const LandingPage: React.FC = () => {
             <p className="text-xs text-cafe-muted mt-1 leading-relaxed">
               Generate crisp high-resolution PNGs for Tables 01-20 or storefront takeout with branded color presets and direct URLs.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 shadow-warm">
+          <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-lg hover:border-blue-500/40 transition-all hover:-translate-y-1">
             <div className="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center mb-4">
               <TrendingUp className="w-6 h-6 text-blue-600" />
             </div>
@@ -1017,9 +1083,9 @@ export const LandingPage: React.FC = () => {
             <p className="text-xs text-cafe-muted mt-1 leading-relaxed">
               Orders placed in the customer portal or table QR checkout instantly reflect in the KDS and POS with zero page reloads.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 shadow-warm">
+          <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-lg hover:border-purple-500/40 transition-all hover:-translate-y-1">
             <div className="w-10 h-10 rounded-2xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-4">
               <Receipt className="w-6 h-6 text-purple-600" />
             </div>
@@ -1027,8 +1093,8 @@ export const LandingPage: React.FC = () => {
             <p className="text-xs text-cafe-muted mt-1 leading-relaxed">
               CSS print stylesheets calibrated for 58mm and 80mm thermal POS receipt printers and GST customer tax invoices.
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* 9. SOCIAL PROOF & TESTIMONIALS */}
@@ -1043,7 +1109,13 @@ export const LandingPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
             {[
               {
                 quote: 'CafeOS solved our Saturday night chaos. Order chits never get lost because the KDS chime alerts the chefs immediately. Our table turnaround went from 48 minutes to 31 minutes.',
@@ -1067,9 +1139,10 @@ export const LandingPage: React.FC = () => {
                 rating: 5,
               },
             ].map((t, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="p-6 rounded-3xl bg-white dark:bg-stone-900 border border-cafe-border/80 dark:border-stone-800 shadow-warm flex flex-col justify-between space-y-4"
+                variants={itemVariants}
+                className="p-6 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm border border-cafe-border/80 dark:border-stone-800 shadow-warm hover:shadow-warm-lg transition-all flex flex-col justify-between space-y-4 hover:-translate-y-1"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-1 text-amber-500">
@@ -1095,53 +1168,63 @@ export const LandingPage: React.FC = () => {
                     <p className="text-[10px] text-cafe-muted">{t.role}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 10. HIGH-CONVERTING BOTTOM CTA BANNER */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-cafe-primary via-stone-900 to-amber-950 p-8 sm:p-14 text-white text-center shadow-2xl border border-cafe-accent/30 space-y-6">
-          <div className="max-w-2xl mx-auto space-y-4">
-            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-cafe-accent text-white">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-cafe-primary via-stone-900 to-amber-950 p-8 sm:p-14 text-white text-center shadow-2xl border border-cafe-accent/30 space-y-6"
+        >
+          <div className="absolute -top-24 -left-24 w-72 h-72 bg-cafe-accent/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+            <span className="px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-cafe-accent text-white shadow-warm-sm border border-white/10">
               Instant Self-Serve Deployment
             </span>
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
               Ready to Upgrade Your Restaurant Operations?
             </h2>
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
               Launch your restaurant workspace in under 2 minutes. Generate table QR codes, invite your kitchen staff, and start taking customer orders immediately.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <div className="relative z-10 flex flex-wrap items-center justify-center gap-4 pt-2">
             <NavLink
               to={isAuthenticated ? '/customer' : '/customer/login'}
-              className="px-8 py-4 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-lg flex items-center gap-2 group transition-all"
+              className="px-8 py-4 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-lg flex items-center gap-2 group transition-all btn-press"
             >
               <Utensils className="w-4 h-4 text-white" />
               <span>Open Customer Portal</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
             </NavLink>
 
             <NavLink
               to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
-              className="px-8 py-4 rounded-2xl bg-white text-cafe-primary hover:bg-cafe-sand font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2"
+              className="px-8 py-4 rounded-2xl bg-white text-cafe-primary hover:bg-cafe-sand font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-warm btn-press"
             >
               <Store className="w-4 h-4 text-cafe-accent" />
               <span>Open Restaurant Portal</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </NavLink>
 
             <NavLink
               to="/onboarding"
-              className="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-xs uppercase tracking-wider border border-white/20 transition-all"
+              className="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-black text-xs uppercase tracking-wider border border-white/20 transition-all btn-press"
             >
               <span>Start Free 14-Day Trial</span>
             </NavLink>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 11. REFINED FOOTER */}
