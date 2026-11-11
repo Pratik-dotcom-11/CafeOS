@@ -175,7 +175,7 @@ export const CustomerPortalLayout: React.FC = () => {
             {/* Cart Button */}
             <NavLink
               to="/customer/cart"
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-warm ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-warm btn-press ${
                 isCartActive
                   ? 'bg-cafe-accent text-white'
                   : 'bg-cafe-primary text-white hover:bg-stone-800'

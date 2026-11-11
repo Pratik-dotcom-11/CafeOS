@@ -422,7 +422,7 @@ export const CustomerHubPage: React.FC = () => {
             <button
               key={c.id}
               onClick={() => setSelectedCuisine(c.id)}
-              className={`px-4 py-2 rounded-2xl text-xs font-bold shrink-0 flex items-center gap-2 transition-all ${
+              className={`px-4 py-2 rounded-2xl text-xs font-bold shrink-0 flex items-center gap-2 transition-all btn-press ${
                 selectedCuisine === c.id
                   ? 'bg-cafe-primary text-white shadow-warm'
                   : 'bg-white hover:bg-cafe-sand/40 text-cafe-primary border border-cafe-border'

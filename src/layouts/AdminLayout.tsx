@@ -277,7 +277,7 @@ export const AdminLayout: React.FC = () => {
             <div className="relative">
               <button
                 onClick={() => setWorkspaceMenuOpen(!workspaceMenuOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-cafe-sand/40 dark:bg-stone-800 hover:bg-cafe-sand/70 transition-all text-left"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-cafe-sand/40 dark:bg-stone-800 hover:bg-cafe-sand/70 transition-all text-left btn-press"
                 title="Switch Restaurant Workspace"
               >
                 <div className="w-6 h-6 rounded-lg bg-cafe-accent text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
@@ -384,7 +384,7 @@ export const AdminLayout: React.FC = () => {
             <button
               onClick={toggleDarkMode}
               title="Toggle Theme"
-              className="p-2 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-cafe-light dark:bg-stone-800 text-cafe-primary dark:text-cafe-cream hover:bg-cafe-sand/40 transition-colors"
+              className="p-2 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-cafe-light dark:bg-stone-800 text-cafe-primary dark:text-cafe-cream hover:bg-cafe-sand/40 transition-colors btn-press"
             >
               {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-stone-600" />}
             </button>
@@ -393,7 +393,7 @@ export const AdminLayout: React.FC = () => {
             <div className="relative">
               <button
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
-                className="p-2 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-cafe-light dark:bg-stone-800 text-cafe-primary dark:text-cafe-cream hover:bg-cafe-sand/40 relative transition-colors"
+                className="p-2 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-cafe-light dark:bg-stone-800 text-cafe-primary dark:text-cafe-cream hover:bg-cafe-sand/40 relative transition-colors btn-press"
               >
                 <Bell className="w-4 h-4" />
                 {pendingOrdersCount > 0 && (

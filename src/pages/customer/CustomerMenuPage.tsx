@@ -476,7 +476,7 @@ export const CustomerMenuPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDietFilter('all')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all btn-press ${
               dietFilter === 'all'
                 ? 'bg-cafe-primary text-white shadow-sm'
                 : 'text-cafe-muted hover:text-cafe-primary'
@@ -487,7 +487,7 @@ export const CustomerMenuPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDietFilter('veg')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all btn-press ${
               dietFilter === 'veg'
                 ? 'bg-emerald-600 text-white shadow-sm'
                 : 'text-emerald-700 hover:bg-emerald-50'
@@ -501,7 +501,7 @@ export const CustomerMenuPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDietFilter('non-veg')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all btn-press ${
               dietFilter === 'non-veg'
                 ? 'bg-rose-700 text-white shadow-sm'
                 : 'text-rose-700 hover:bg-rose-50'
@@ -523,7 +523,7 @@ export const CustomerMenuPage: React.FC = () => {
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.slug)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all border shrink-0 ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all border shrink-0 btn-press ${
                 selectedCategory === cat.slug
                   ? 'bg-cafe-accent text-white border-cafe-accent shadow-warm scale-[1.02]'
                   : 'bg-white border-cafe-border text-cafe-primary hover:border-cafe-accent/40'

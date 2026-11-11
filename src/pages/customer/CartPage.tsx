@@ -174,7 +174,7 @@ export const CartPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDiningMode('dine-in')}
-            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 ${
+            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 btn-press ${
               diningMode === 'dine-in'
                 ? 'bg-cafe-primary text-white border-cafe-primary shadow-sm'
                 : 'bg-cafe-light border-cafe-border text-cafe-primary hover:bg-cafe-sand/40'
@@ -187,7 +187,7 @@ export const CartPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDiningMode('takeaway')}
-            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 ${
+            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 btn-press ${
               diningMode === 'takeaway'
                 ? 'bg-cafe-primary text-white border-cafe-primary shadow-sm'
                 : 'bg-cafe-light border-cafe-border text-cafe-primary hover:bg-cafe-sand/40'
@@ -200,7 +200,7 @@ export const CartPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDiningMode('delivery')}
-            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 ${
+            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 btn-press ${
               diningMode === 'delivery'
                 ? 'bg-cafe-primary text-white border-cafe-primary shadow-sm'
                 : 'bg-cafe-light border-cafe-border text-cafe-primary hover:bg-cafe-sand/40'

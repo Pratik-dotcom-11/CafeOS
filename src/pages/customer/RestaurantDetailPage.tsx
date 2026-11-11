@@ -488,7 +488,7 @@ export const RestaurantDetailPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setVegOnly((v) => !v)}
-              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 btn-press ${
                 vegOnly
                   ? 'bg-emerald-50 border-emerald-300 text-emerald-700'
                   : 'bg-white border-cafe-border text-cafe-muted hover:text-cafe-primary'
@@ -508,7 +508,7 @@ export const RestaurantDetailPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedCategory('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all btn-press ${
                 selectedCategory === 'all'
                   ? 'bg-cafe-primary text-white shadow-sm'
                   : 'bg-white border border-cafe-border text-cafe-muted hover:text-cafe-primary'
@@ -521,7 +521,7 @@ export const RestaurantDetailPage: React.FC = () => {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all btn-press ${
                   selectedCategory === cat
                     ? 'bg-cafe-primary text-white shadow-sm'
                     : 'bg-white border border-cafe-border text-cafe-muted hover:text-cafe-primary'
