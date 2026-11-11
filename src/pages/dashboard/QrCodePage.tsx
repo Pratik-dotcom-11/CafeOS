@@ -61,7 +61,7 @@ export const QrCodePage: React.FC = () => {
   return (
     <div className="p-4 lg:p-8 max-w-7xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
+        <h1 className="font-display text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
           Contactless QR Menu Generator
         </h1>
         <p className="text-xs text-cafe-muted mt-1">
@@ -72,7 +72,7 @@ export const QrCodePage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Config Controls (7 cols) */}
         <div className="lg:col-span-7 bg-white dark:bg-cafe-surface-dark p-6 rounded-3xl border border-cafe-border dark:border-cafe-border-dark shadow-warm space-y-5">
-          <h2 className="text-base font-extrabold text-cafe-primary dark:text-cafe-cream">
+          <h2 className="font-display text-base font-extrabold text-cafe-primary dark:text-cafe-cream">
             QR Configuration
           </h2>
 

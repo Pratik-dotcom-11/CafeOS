@@ -155,7 +155,7 @@ export const RazorpayModal: React.FC<RazorpayModalProps> = ({
             <span className="text-[11px] text-blue-200 uppercase font-bold tracking-wider block">
               Payable Total
             </span>
-            <span className="text-xl font-black">
+            <span className="font-display text-xl font-black">
               {formatCurrency(totalRupees, currencySymbol)}
             </span>
           </div>

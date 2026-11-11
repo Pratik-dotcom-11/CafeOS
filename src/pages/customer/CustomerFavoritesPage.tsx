@@ -43,7 +43,7 @@ export const CustomerFavoritesPage: React.FC = () => {
     <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-black text-cafe-primary tracking-tight">Saved Favorites</h1>
+        <h1 className="font-display text-2xl font-black text-cafe-primary tracking-tight">Saved Favorites</h1>
         <p className="text-xs text-cafe-muted mt-0.5">
           Your bookmarked partner restaurants and go-to signature dishes for instant ordering.
         </p>

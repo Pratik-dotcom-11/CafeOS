@@ -307,7 +307,7 @@ export const MenuPage: React.FC = () => {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
+          <h1 className="font-display text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
             Menu & Catalog Management
           </h1>
           <p className="text-xs text-cafe-muted mt-1">
@@ -318,13 +318,13 @@ export const MenuPage: React.FC = () => {
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsCategoryModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-white dark:bg-cafe-surface-dark hover:bg-cafe-cream/50 text-cafe-primary dark:text-cafe-cream text-xs font-bold shadow-warm-sm transition-all"
+            className="px-4 py-2.5 rounded-xl border border-cafe-border dark:border-cafe-border-dark bg-white dark:bg-cafe-surface-dark hover:bg-cafe-cream/50 text-cafe-primary dark:text-cafe-cream text-xs font-bold shadow-warm-sm transition-all btn-press"
           >
             + Manage Categories
           </button>
           <button
             onClick={handleOpenAdd}
-            className="px-4 py-2.5 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-bold shadow-warm flex items-center gap-1.5 transition-all"
+            className="px-4 py-2.5 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-bold shadow-warm flex items-center gap-1.5 transition-all btn-press"
           >
             <Plus className="w-4 h-4" />
             <span>Add Menu Item</span>
@@ -459,11 +459,11 @@ export const MenuPage: React.FC = () => {
                       {p.category}
                     </td>
                     <td className="py-4 px-4">
-                      <span className="font-extrabold text-cafe-accent text-sm">
+                      <span className="font-display font-extrabold text-cafe-accent text-sm">
                         {formatCurrency(p.price, restaurant.currencySymbol)}
                       </span>
                       {p.originalPrice && p.originalPrice > p.price && (
-                        <span className="text-[11px] text-stone-400 line-through ml-1.5">
+                        <span className="font-display text-[11px] text-stone-400 line-through ml-1.5">
                           {formatCurrency(p.originalPrice, restaurant.currencySymbol)}
                         </span>
                       )}

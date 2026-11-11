@@ -340,7 +340,7 @@ export const RestaurantDetailPage: React.FC = () => {
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">{restaurant.name}</h1>
+            <h1 className="font-display text-2xl sm:text-4xl font-black tracking-tight">{restaurant.name}</h1>
             {restaurant.tagline && (
               <p className="text-xs sm:text-sm text-white/85 max-w-2xl font-medium">
                 {restaurant.tagline}

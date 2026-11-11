@@ -135,7 +135,7 @@ export const SettingsPage: React.FC = () => {
     <div className="p-4 lg:p-8 max-w-5xl mx-auto space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
+        <h1 className="font-display text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
           Restaurant Settings & Configuration
         </h1>
         <p className="text-xs text-cafe-muted mt-1">
@@ -506,7 +506,7 @@ export const SettingsPage: React.FC = () => {
           <button
             type="submit"
             disabled={isSaving}
-            className="px-6 py-3 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-extrabold uppercase tracking-wider shadow-warm flex items-center gap-2 transition-all"
+            className="px-6 py-3 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-extrabold uppercase tracking-wider shadow-warm flex items-center gap-2 transition-all btn-press"
           >
             <Save className="w-4 h-4" />
             <span>{isSaving ? 'Persisting...' : 'Save Configuration'}</span>

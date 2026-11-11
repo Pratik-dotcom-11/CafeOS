@@ -52,7 +52,7 @@ export const CustomerRewardsPage: React.FC = () => {
     <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
       {/* Title */}
       <div>
-        <h1 className="text-2xl font-black text-cafe-primary tracking-tight">
+        <h1 className="font-display text-2xl font-black text-cafe-primary tracking-tight">
           CaféOS Dining Coins & Loyalty Tier
         </h1>
         <p className="text-xs text-cafe-muted mt-0.5">
@@ -73,10 +73,10 @@ export const CustomerRewardsPage: React.FC = () => {
 
             <p className="text-xs text-cafe-cream/80">Available Redeemable Balance</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+              <span className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight">
                 {currentCoins}
               </span>
-              <span className="text-lg font-bold text-amber-400">Coins</span>
+              <span className="font-display text-lg font-bold text-amber-400">Coins</span>
               <span className="text-xs text-white/60 ml-2">(= ₹{currentCoins} discount)</span>
             </div>
           </div>

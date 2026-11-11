@@ -152,7 +152,7 @@ export const TablesPage: React.FC = () => {
       {/* Page Title & Add Button */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
+          <h1 className="font-display text-2xl font-black text-cafe-primary dark:text-cafe-cream tracking-tight">
             Floor Plan & Table Management
           </h1>
           <p className="text-xs text-cafe-muted mt-1">
@@ -162,7 +162,7 @@ export const TablesPage: React.FC = () => {
 
         <button
           onClick={() => setIsAddTableOpen(true)}
-          className="px-4 py-2.5 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-bold shadow-warm flex items-center gap-1.5 self-start sm:self-auto transition-all"
+          className="px-4 py-2.5 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white text-xs font-bold shadow-warm flex items-center gap-1.5 self-start sm:self-auto transition-all btn-press"
         >
           <Plus className="w-4 h-4" />
           <span>Add Dining Table</span>
@@ -171,39 +171,39 @@ export const TablesPage: React.FC = () => {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive">
           <div className="flex items-center justify-between text-xs font-bold text-cafe-muted">
             <span>Available</span>
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
           </div>
-          <p className="text-2xl font-black text-emerald-600 mt-2">{availableCount}</p>
+          <p className="font-display text-2xl font-black text-emerald-600 mt-2">{availableCount}</p>
           <span className="text-[11px] text-cafe-muted">Ready for guests</span>
         </div>
 
-        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive">
           <div className="flex items-center justify-between text-xs font-bold text-cafe-muted">
             <span>Occupied</span>
             <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse" />
           </div>
-          <p className="text-2xl font-black text-orange-600 mt-2">{occupiedCount}</p>
+          <p className="font-display text-2xl font-black text-orange-600 mt-2">{occupiedCount}</p>
           <span className="text-[11px] text-cafe-muted">Dining in progress</span>
         </div>
 
-        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive">
           <div className="flex items-center justify-between text-xs font-bold text-cafe-muted">
             <span>Billing Due</span>
             <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
           </div>
-          <p className="text-2xl font-black text-blue-600 mt-2">{billingCount}</p>
+          <p className="font-display text-2xl font-black text-blue-600 mt-2">{billingCount}</p>
           <span className="text-[11px] text-cafe-muted">Bill requested</span>
         </div>
 
-        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+        <div className="p-4 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive">
           <div className="flex items-center justify-between text-xs font-bold text-cafe-muted">
             <span>Reserved</span>
             <span className="w-2.5 h-2.5 rounded-full bg-purple-500" />
           </div>
-          <p className="text-2xl font-black text-purple-600 mt-2">{reservedCount}</p>
+          <p className="font-display text-2xl font-black text-purple-600 mt-2">{reservedCount}</p>
           <span className="text-[11px] text-cafe-muted">Upcoming bookings</span>
         </div>
       </div>

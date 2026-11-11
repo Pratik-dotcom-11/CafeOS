@@ -124,6 +124,112 @@
   transform: scale(0.97);
 }
 
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  border-radius: 1rem;
+  background-color: #302019;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px -2px rgba(48, 32, 25, 0.08);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.94;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -3px rgba(48, 32, 25, 0.12);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  border-radius: 1rem;
+  background-color: #D97736;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px -2px rgba(217, 119, 54, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.btn-accent:hover {
+  background-color: #C26325;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px -2px rgba(217, 119, 54, 0.35);
+}
+
+.btn-accent:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  border-radius: 1rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E8E1D7;
+  color: #302019;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.btn-secondary:hover {
+  background-color: #F5EBDD;
+  border-color: #D97736;
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Standardized Typography Classes */
+.display-heading-1 {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.display-heading-2 {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.display-metric {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Standardized Surface Classes */
+.card-surface {
+  background-color: #FFFFFF;
+  border: 1px solid #E8E1D7;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 14px -2px rgba(48, 32, 25, 0.08), 0 2px 6px -1px rgba(48, 32, 25, 0.04);
+}
+
+.dark .card-surface {
+  background-color: #211D19;
+  border-color: #2D2722;
+}
+
 /* Standardized Accessible Form Inputs */
 .input-base {
   font-family: 'Manrope', sans-serif;
