@@ -122,21 +122,21 @@ export const LoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleQuickDemo('owner')}
-                className="py-1.5 px-2 rounded-xl bg-white dark:bg-stone-700 border border-cafe-border dark:border-stone-600 text-[11px] font-bold text-cafe-primary dark:text-stone-200 hover:border-cafe-accent transition-colors"
+                className="py-1.5 px-2 rounded-xl bg-white dark:bg-stone-700 border border-cafe-border dark:border-stone-600 text-[11px] font-bold text-cafe-primary dark:text-stone-200 hover:border-cafe-accent transition-colors btn-press"
               >
                 Manager POS
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickDemo('kds')}
-                className="py-1.5 px-2 rounded-xl bg-white dark:bg-stone-700 border border-cafe-border dark:border-stone-600 text-[11px] font-bold text-orange-600 hover:border-orange-500 transition-colors"
+                className="py-1.5 px-2 rounded-xl bg-white dark:bg-stone-700 border border-cafe-border dark:border-stone-600 text-[11px] font-bold text-orange-600 hover:border-orange-500 transition-colors btn-press"
               >
                 Kitchen KDS
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickDemo('superadmin')}
-                className="py-1.5 px-2 rounded-xl bg-white dark:bg-stone-700 border border-cafe-border dark:border-stone-600 text-[11px] font-bold text-purple-600 hover:border-purple-500 transition-colors"
+                className="py-1.5 px-2 rounded-xl bg-white dark:bg-stone-700 border border-cafe-border dark:border-stone-600 text-[11px] font-bold text-purple-600 hover:border-purple-500 transition-colors btn-press"
               >
                 Super Admin
               </button>
@@ -249,7 +249,7 @@ export const LoginPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-extrabold text-xs uppercase tracking-wider shadow-warm transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-extrabold text-xs uppercase tracking-wider shadow-warm transition-all flex items-center justify-center gap-2 btn-press"
             >
               {isLoading ? (
                 <span>Verifying credentials...</span>

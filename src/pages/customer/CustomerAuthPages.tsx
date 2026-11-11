@@ -106,7 +106,7 @@ export const CustomerLoginPage: React.FC = () => {
           type="button"
           onClick={handleGoogleSignIn}
           disabled={isLoading}
-          className="w-full py-3 rounded-xl bg-white hover:bg-stone-50 text-stone-700 border-2 border-stone-200 hover:border-stone-300 text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+          className="w-full py-3 rounded-xl bg-white hover:bg-stone-50 text-stone-700 border-2 border-stone-200 hover:border-stone-300 text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-3 disabled:opacity-50 btn-press"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path
@@ -179,7 +179,7 @@ export const CustomerLoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 rounded-xl bg-cafe-primary hover:bg-cafe-accent text-white text-xs font-black tracking-wide shadow-warm transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-cafe-primary hover:bg-cafe-accent text-white text-xs font-black tracking-wide shadow-warm transition-all flex items-center justify-center gap-2 disabled:opacity-50 btn-press"
           >
             {isLoading ? <span>Signing in...</span> : <span>Sign In & Continue</span>}
             <ArrowRight className="w-4 h-4" />
@@ -190,7 +190,7 @@ export const CustomerLoginPage: React.FC = () => {
           type="button"
           onClick={handleDemoCustomerLogin}
           disabled={isLoading}
-          className="w-full py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition-all flex items-center justify-center gap-2"
+          className="w-full py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold transition-all flex items-center justify-center gap-2 btn-press"
         >
           <Sparkles className="w-3.5 h-3.5 text-amber-600 fill-amber-600" />
           <span>Quick 1-Click Demo Diner Login</span>

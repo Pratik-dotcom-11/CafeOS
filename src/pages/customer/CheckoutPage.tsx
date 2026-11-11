@@ -329,7 +329,7 @@ export const CheckoutPage: React.FC = () => {
             <button
               type="button"
               onClick={() => setOrderType('dine-in')}
-              className={`p-3.5 rounded-2xl border text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition-all ${
+              className={`p-3.5 rounded-2xl border text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition-all btn-press ${
                 orderType === 'dine-in'
                   ? 'border-cafe-accent bg-cafe-cream/70 text-cafe-primary ring-2 ring-cafe-accent shadow-sm'
                   : 'border-cafe-border text-cafe-muted hover:bg-cafe-sand/40'
@@ -344,7 +344,7 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setOrderType('takeaway')}
-                className={`p-3.5 rounded-2xl border text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition-all ${
+                className={`p-3.5 rounded-2xl border text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition-all btn-press ${
                   orderType === 'takeaway'
                     ? 'border-cafe-accent bg-cafe-cream/70 text-cafe-primary ring-2 ring-cafe-accent shadow-sm'
                     : 'border-cafe-border text-cafe-muted hover:bg-cafe-sand/40'
@@ -360,7 +360,7 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setOrderType('delivery')}
-                className={`p-3.5 rounded-2xl border text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition-all ${
+                className={`p-3.5 rounded-2xl border text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition-all btn-press ${
                   orderType === 'delivery'
                     ? 'border-cafe-accent bg-cafe-cream/70 text-cafe-primary ring-2 ring-cafe-accent shadow-sm'
                     : 'border-cafe-border text-cafe-muted hover:bg-cafe-sand/40'

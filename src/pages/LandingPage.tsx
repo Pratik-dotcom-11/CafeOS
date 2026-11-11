@@ -342,7 +342,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex items-center gap-2 sm:gap-3">
             <NavLink
               to={isAuthenticated ? '/customer' : '/customer/login'}
-              className="text-xs font-extrabold text-cafe-accent hover:text-cafe-primary dark:text-amber-400 dark:hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-cafe-sand/50 flex items-center gap-1.5 border border-cafe-accent/30 shadow-sm"
+              className="text-xs font-extrabold text-cafe-accent hover:text-cafe-primary dark:text-amber-400 dark:hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-cafe-sand/50 flex items-center gap-1.5 border border-cafe-accent/30 shadow-sm btn-press"
             >
               <Utensils className="w-3.5 h-3.5" />
               <span>Customer Portal</span>
@@ -350,7 +350,7 @@ export const LandingPage: React.FC = () => {
 
             <NavLink
               to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
-              className="relative group px-4 sm:px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cafe-accent to-amber-600 hover:from-amber-600 hover:to-cafe-accent text-white text-xs font-black shadow-warm hover:shadow-warm-md transition-all flex items-center gap-2"
+              className="relative group px-4 sm:px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cafe-accent to-amber-600 hover:from-amber-600 hover:to-cafe-accent text-white text-xs font-black shadow-warm hover:shadow-warm-md transition-all flex items-center gap-2 btn-press"
             >
               <Store className="w-3.5 h-3.5" />
               <span>Restaurant Portal</span>
@@ -415,7 +415,7 @@ export const LandingPage: React.FC = () => {
             <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">
               <NavLink
                 to={isAuthenticated ? '/customer' : '/customer/login'}
-                className="px-6 py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-md hover:shadow-warm-lg transition-all flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-md hover:shadow-warm-lg transition-all flex items-center gap-2 group btn-press"
               >
                 <Utensils className="w-4 h-4 text-white" />
                 <span>Customer Portal</span>
@@ -424,7 +424,7 @@ export const LandingPage: React.FC = () => {
 
               <NavLink
                 to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
-                className="px-6 py-3.5 rounded-2xl bg-cafe-primary dark:bg-white dark:text-stone-900 text-white font-black text-xs uppercase tracking-wider shadow-warm hover:shadow-warm-md hover:bg-stone-800 transition-all flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-2xl bg-cafe-primary dark:bg-white dark:text-stone-900 text-white font-black text-xs uppercase tracking-wider shadow-warm hover:shadow-warm-md hover:bg-stone-800 transition-all flex items-center gap-2 group btn-press"
               >
                 <Store className="w-4 h-4 text-cafe-accent" />
                 <span>Restaurant Portal</span>
@@ -433,7 +433,7 @@ export const LandingPage: React.FC = () => {
 
               <NavLink
                 to="/dashboard/pos"
-                className="px-4 py-3.5 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent transition-all flex items-center gap-1.5"
+                className="px-4 py-3.5 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent transition-all flex items-center gap-1.5 btn-press"
               >
                 <ShoppingBag className="w-4 h-4 text-orange-600" />
                 <span>POS Cashier</span>
@@ -441,7 +441,7 @@ export const LandingPage: React.FC = () => {
 
               <NavLink
                 to="/kitchen"
-                className="px-4 py-3.5 rounded-2xl bg-stone-900 text-orange-400 font-extrabold text-xs shadow-warm flex items-center gap-1.5 border border-orange-500/30 hover:bg-black transition-all"
+                className="px-4 py-3.5 rounded-2xl bg-stone-900 text-orange-400 font-extrabold text-xs shadow-warm flex items-center gap-1.5 border border-orange-500/30 hover:bg-black transition-all btn-press"
               >
                 <ChefHat className="w-4 h-4 text-orange-400" />
                 <span>Kitchen KDS</span>

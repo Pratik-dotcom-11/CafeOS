@@ -169,7 +169,7 @@ export const BillingPage: React.FC = () => {
               <IndianRupee className="w-4 h-4" />
             </div>
           </div>
-          <h3 className="text-2xl font-black text-emerald-600 mt-2">
+          <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-emerald-600 mt-2">
             {formatCurrency(settledGross, restaurant.currencySymbol)}
           </h3>
           <p className="text-xs text-cafe-muted mt-1">Reconciled with POS & UPI ledger</p>
@@ -184,7 +184,7 @@ export const BillingPage: React.FC = () => {
               <Clock className="w-4 h-4" />
             </div>
           </div>
-          <h3 className="text-2xl font-black text-amber-600 mt-2">
+          <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-amber-600 mt-2">
             {formatCurrency(pendingAmount, restaurant.currencySymbol)}
           </h3>
           <p className="text-xs text-cafe-muted mt-1">Awaiting dining table settlement</p>
@@ -199,7 +199,7 @@ export const BillingPage: React.FC = () => {
               <ShieldCheck className="w-4 h-4" />
             </div>
           </div>
-          <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream mt-2">
+          <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream mt-2">
             {formatCurrency(totalGst, restaurant.currencySymbol)}
           </h3>
           <p className="text-xs text-cafe-muted mt-1">
@@ -216,7 +216,7 @@ export const BillingPage: React.FC = () => {
               <RotateCcw className="w-4 h-4" />
             </div>
           </div>
-          <h3 className="text-2xl font-black text-rose-600 mt-2">
+          <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-rose-600 mt-2">
             {formatCurrency(refundedGross, restaurant.currencySymbol)}
           </h3>
           <p className="text-xs text-cafe-muted mt-1">Audited reversals & cancellations</p>

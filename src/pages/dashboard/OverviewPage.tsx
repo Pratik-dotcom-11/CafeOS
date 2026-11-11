@@ -240,7 +240,7 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream">
+            <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream">
               {formatCurrency(totalRevenue, restaurant.currencySymbol)}
             </h3>
             <p className="text-xs text-emerald-600 font-semibold mt-1 flex items-center gap-1">
@@ -273,7 +273,7 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream">
+            <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream">
               {totalOrdersCount}
             </h3>
             <p className="text-xs text-emerald-600 font-semibold mt-1 flex items-center gap-1">
@@ -297,7 +297,7 @@ export const OverviewPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream">
+            <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream">
               {formatCurrency(avgOrderValue, restaurant.currencySymbol)}
             </h3>
             <p className="text-xs text-cafe-muted font-medium mt-1">
@@ -321,7 +321,7 @@ export const OverviewPage: React.FC = () => {
           </div>
           <div className="mt-3">
             <div className="flex items-baseline justify-between">
-              <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream">
                 {occupiedTables} / {tables.length}
               </h3>
               <span className="text-xs font-bold text-cafe-accent">

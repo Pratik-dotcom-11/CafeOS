@@ -26,13 +26,19 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Manrope', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Space Grotesk', 'Manrope', 'sans-serif'],
+        heading: ['Space Grotesk', 'Manrope', 'sans-serif'],
       },
       boxShadow: {
+        'warm-xs': '0 1px 2px rgba(48, 32, 25, 0.04)',
         'warm-sm': '0 1px 3px rgba(48, 32, 25, 0.06), 0 1px 2px rgba(48, 32, 25, 0.04)',
-        'warm': '0 4px 12px -2px rgba(48, 32, 25, 0.08), 0 2px 6px -1px rgba(48, 32, 25, 0.04)',
-        'warm-md': '0 8px 20px -3px rgba(48, 32, 25, 0.1), 0 4px 10px -2px rgba(48, 32, 25, 0.05)',
-        'warm-lg': '0 16px 32px -4px rgba(48, 32, 25, 0.12), 0 8px 16px -3px rgba(48, 32, 25, 0.06)',
+        'warm': '0 4px 14px -2px rgba(48, 32, 25, 0.08), 0 2px 6px -1px rgba(48, 32, 25, 0.04)',
+        'warm-md': '0 10px 24px -3px rgba(48, 32, 25, 0.10), 0 4px 10px -2px rgba(48, 32, 25, 0.05)',
+        'warm-lg': '0 18px 36px -4px rgba(48, 32, 25, 0.12), 0 8px 18px -3px rgba(48, 32, 25, 0.06)',
+        'warm-xl': '0 24px 48px -6px rgba(48, 32, 25, 0.15), 0 12px 24px -4px rgba(48, 32, 25, 0.08)',
+        'card': '0 2px 8px rgba(48, 32, 25, 0.05), 0 12px 24px -6px rgba(48, 32, 25, 0.08)',
+        'popover': '0 20px 40px -10px rgba(48, 32, 25, 0.18)',
       },
       borderRadius: {
         '2xl': '1rem',
