@@ -12,3 +12,4 @@ if (fs.existsSync(distIndex)) {
 } else {
   console.warn('dist/index.html not found, skipping 404 copy')
 }
+

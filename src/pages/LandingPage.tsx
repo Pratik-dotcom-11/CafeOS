@@ -33,12 +33,14 @@ import {
   LogOut,
   User,
   Menu,
-  X
+  X,
+  Lock
 } from 'lucide-react';
 import { useCafe } from '../context/CafeContext';
 import { useAuth } from '../context/AuthContext';
 import { formatCurrency } from '../utils/formatters';
 import { CafeLogo } from '../components/common/CafeLogo';
+import { SubscriptionCheckoutModal, PricingPlanData } from '../components/payment/SubscriptionCheckoutModal';
 
 // Animation variants for smooth scroll-triggered reveals and micro-interactions
 const containerVariants = {
@@ -67,6 +69,8 @@ export const LandingPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'pos' | 'qr' | 'kds' | 'inventory' | 'admin'>('pos');
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedSubscriptionPlan, setSelectedSubscriptionPlan] = useState<PricingPlanData | null>(null);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   const isStaff = (Array.isArray(workspaces) && workspaces.length > 0) || Boolean(profile?.is_super_admin);
 
@@ -1119,9 +1123,13 @@ export const LandingPage: React.FC = () => {
                   </div>
 
                   <div className="pt-6">
-                    <NavLink
-                      to="/super-admin/subscriptions"
-                      className={`w-full py-3 rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all btn-press ${
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedSubscriptionPlan(plan);
+                        setIsCheckoutModalOpen(true);
+                      }}
+                      className={`w-full py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all btn-press ${
                         plan.isPopular
                           ? 'bg-cafe-accent hover:bg-cafe-accent-hover text-white shadow-warm'
                           : 'bg-cafe-sand/60 dark:bg-stone-800 text-cafe-primary dark:text-white hover:bg-cafe-sand'
@@ -1129,12 +1137,37 @@ export const LandingPage: React.FC = () => {
                     >
                       <span>{plan.ctaText}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </NavLink>
+                    </button>
                   </div>
                 </motion.div>
               );
             })}
           </motion.div>
+
+          {/* Pricing Section Footer Links */}
+          <div className="pt-6 text-center text-xs text-cafe-muted flex flex-wrap items-center justify-center gap-4 border-t border-cafe-border/50 dark:border-stone-800">
+            <span>
+              Need a custom multi-chain SLA?{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedSubscriptionPlan(pricingPlans[3]);
+                  setIsCheckoutModalOpen(true);
+                }}
+                className="text-cafe-accent font-black hover:underline"
+              >
+                Inquire with Enterprise Team &rarr;
+              </button>
+            </span>
+            <span>•</span>
+            <NavLink
+              to="/super-admin/subscriptions"
+              className="hover:text-cafe-primary dark:hover:text-white transition-colors flex items-center gap-1 text-[11px]"
+            >
+              <Lock className="w-3 h-3 text-purple-500" />
+              <span>Platform Master Console (Super Admins)</span>
+            </NavLink>
+          </div>
         </div>
       </section>
 
@@ -1376,6 +1409,15 @@ export const LandingPage: React.FC = () => {
           </p>
         </div>
       </footer>
+
+      {/* Subscription Plan Checkout & Payment Gateway Modal */}
+      <SubscriptionCheckoutModal
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+        plan={selectedSubscriptionPlan}
+        billingCycle={billingCycle}
+        onBillingCycleChange={setBillingCycle}
+      />
     </div>
   );
 };
