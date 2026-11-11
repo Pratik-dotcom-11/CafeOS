@@ -167,6 +167,30 @@ export const SuperAdminLayout: React.FC = () => {
             </div>
           )}
 
+          {/* Quick Demo Credentials Info Banner */}
+          <div className="mb-4 p-3 rounded-2xl bg-purple-950/40 border border-purple-800/60 text-xs text-purple-200 flex items-start justify-between gap-2">
+            <div>
+              <p className="font-bold text-white flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                <span>Super Admin Master Credentials</span>
+              </p>
+              <p className="text-[11px] text-purple-300/80 mt-0.5 font-mono">
+                superadmin@cafeos.io • CafeOS@SuperAdmin2026
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setLoginEmail('superadmin@cafeos.io');
+                setLoginPassword('CafeOS@SuperAdmin2026');
+                setLoginError(null);
+              }}
+              className="px-2.5 py-1 rounded-lg bg-purple-600/70 hover:bg-purple-600 text-[10px] font-bold text-white transition-colors shrink-0"
+            >
+              Fill Credentials
+            </button>
+          </div>
+
           <form onSubmit={handleAdminLogin} className="space-y-4 text-xs">
             <div>
               <label className="text-slate-300 font-bold block mb-1">Super Admin Email</label>
