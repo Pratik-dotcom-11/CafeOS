@@ -553,44 +553,50 @@ export const LandingPage: React.FC = () => {
               CafeOS harmonizes multi-restaurant customer discovery, table QR ordering, lightning-fast cashier POS terminals, tactical Kitchen Display Systems (KDS), automated recipe inventory BOM, and seamless Indian UPI/Card payments into one cohesive cloud platform.
             </motion.p>
 
-            {/* Call to Actions: Direct access to Customer Portal & Restaurant Portal */}
+            {/* Call to Actions: Flagship Portals & Operational Modules */}
             <motion.div
               variants={itemVariants}
-              className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3"
+              className="pt-2 flex flex-col items-center lg:items-start gap-3 w-full"
             >
-              <NavLink
-                to={isAuthenticated ? '/customer' : '/customer/login'}
-                className="px-6 py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-md hover:shadow-warm-lg transition-all flex items-center gap-2 group btn-press ring-2 ring-cafe-accent/20"
-              >
-                <Utensils className="w-4 h-4 text-white" />
-                <span>Customer Portal</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </NavLink>
+              {/* Primary Portals: Customer Portal & Restaurant Portal */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-md sm:max-w-none">
+                <NavLink
+                  to={isAuthenticated ? '/customer' : '/customer/login'}
+                  className="px-6 py-3.5 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-black text-xs uppercase tracking-wider shadow-warm-md hover:shadow-warm-lg transition-all flex items-center justify-center gap-2 group btn-press ring-2 ring-cafe-accent/20"
+                >
+                  <Utensils className="w-4 h-4 text-white shrink-0" />
+                  <span>Customer Portal</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
+                </NavLink>
 
-              <NavLink
-                to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
-                className="px-6 py-3.5 rounded-2xl bg-cafe-primary dark:bg-white dark:text-stone-900 text-white font-black text-xs uppercase tracking-wider shadow-warm hover:shadow-warm-md hover:bg-stone-800 transition-all flex items-center gap-2 group btn-press"
-              >
-                <Store className="w-4 h-4 text-cafe-accent" />
-                <span>Restaurant Portal</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </NavLink>
+                <NavLink
+                  to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
+                  className="px-6 py-3.5 rounded-2xl bg-cafe-primary dark:bg-white dark:text-stone-900 text-white font-black text-xs uppercase tracking-wider shadow-warm hover:shadow-warm-md hover:bg-stone-800 transition-all flex items-center justify-center gap-2 group btn-press"
+                >
+                  <Store className="w-4 h-4 text-cafe-accent shrink-0" />
+                  <span>Restaurant Portal</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
+                </NavLink>
+              </div>
 
-              <NavLink
-                to="/dashboard/pos"
-                className="px-4 py-3.5 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent/60 transition-all flex items-center gap-1.5 btn-press"
-              >
-                <ShoppingBag className="w-4 h-4 text-orange-600" />
-                <span>POS Cashier</span>
-              </NavLink>
+              {/* Operational Tools: POS Cashier right beside Kitchen KDS */}
+              <div className="flex items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-md sm:max-w-none">
+                <NavLink
+                  to="/dashboard/pos"
+                  className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-white dark:bg-stone-800 text-cafe-primary dark:text-stone-100 border border-cafe-border dark:border-stone-700 font-extrabold text-xs uppercase tracking-wider shadow-warm-sm hover:border-cafe-accent/60 transition-all flex items-center justify-center gap-1.5 btn-press"
+                >
+                  <ShoppingBag className="w-4 h-4 text-orange-600 shrink-0" />
+                  <span>POS Cashier</span>
+                </NavLink>
 
-              <NavLink
-                to="/kitchen"
-                className="px-4 py-3.5 rounded-2xl bg-stone-900 text-orange-400 font-extrabold text-xs shadow-warm flex items-center gap-1.5 border border-orange-500/30 hover:bg-black transition-all btn-press"
-              >
-                <ChefHat className="w-4 h-4 text-orange-400" />
-                <span>Kitchen KDS</span>
-              </NavLink>
+                <NavLink
+                  to="/kitchen"
+                  className="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-stone-900 text-orange-400 font-extrabold text-xs shadow-warm flex items-center justify-center gap-1.5 border border-orange-500/30 hover:bg-black transition-all btn-press"
+                >
+                  <ChefHat className="w-4 h-4 text-orange-400 shrink-0" />
+                  <span>Kitchen KDS</span>
+                </NavLink>
+              </div>
             </motion.div>
 
             {/* Quick Proof Metrics */}
