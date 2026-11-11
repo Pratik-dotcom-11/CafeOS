@@ -171,44 +171,44 @@ export const CartPage: React.FC = () => {
         <span className="text-xs font-black uppercase tracking-wider text-cafe-primary block">
           Choose How You Would Like to Enjoy
         </span>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
           <button
             type="button"
             onClick={() => setDiningMode('dine-in')}
-            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 btn-press ${
+            className={`p-2 sm:p-3 rounded-xl border text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center gap-1 sm:gap-1.5 btn-press ${
               diningMode === 'dine-in'
                 ? 'bg-cafe-primary text-white border-cafe-primary shadow-sm'
                 : 'bg-cafe-light border-cafe-border text-cafe-primary hover:bg-cafe-sand/40'
             }`}
           >
             <Utensils className="w-4 h-4" />
-            <span>Dine-In ({tableNumber || 'Table'})</span>
+            <span className="truncate">Dine-In</span>
           </button>
 
           <button
             type="button"
             onClick={() => setDiningMode('takeaway')}
-            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 btn-press ${
+            className={`p-2 sm:p-3 rounded-xl border text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center gap-1 sm:gap-1.5 btn-press ${
               diningMode === 'takeaway'
                 ? 'bg-cafe-primary text-white border-cafe-primary shadow-sm'
                 : 'bg-cafe-light border-cafe-border text-cafe-primary hover:bg-cafe-sand/40'
             }`}
           >
             <ShoppingBag className="w-4 h-4" />
-            <span>Takeaway</span>
+            <span className="truncate">Takeaway</span>
           </button>
 
           <button
             type="button"
             onClick={() => setDiningMode('delivery')}
-            className={`p-3 rounded-xl border text-xs font-bold transition-all flex flex-col items-center justify-center gap-1.5 btn-press ${
+            className={`p-2 sm:p-3 rounded-xl border text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center gap-1 sm:gap-1.5 btn-press ${
               diningMode === 'delivery'
                 ? 'bg-cafe-primary text-white border-cafe-primary shadow-sm'
                 : 'bg-cafe-light border-cafe-border text-cafe-primary hover:bg-cafe-sand/40'
             }`}
           >
             <Bike className="w-4 h-4" />
-            <span>Delivery</span>
+            <span className="truncate">Delivery</span>
           </button>
         </div>
       </div>

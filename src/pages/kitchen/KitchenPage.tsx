@@ -49,6 +49,7 @@ export const KitchenPage: React.FC = () => {
   const [rejectingOrder, setRejectingOrder] = useState<Order | null>(null);
   const [rejectReason, setRejectReason] = useState<string>('Ingredient 86d / Out of Stock');
   const [isRejecting, setIsRejecting] = useState<boolean>(false);
+  const [mobileColumnTab, setMobileColumnTab] = useState<string>('all');
 
   const getElapsedMinutes = (isoString: string) => {
     return Math.floor((Date.now() - new Date(isoString).getTime()) / (1000 * 60));
@@ -126,7 +127,42 @@ export const KitchenPage: React.FC = () => {
   const completedOrders = orders.filter((o) => o.status === 'completed');
 
   return (
-    <div className="h-full space-y-4">
+    <div className="h-full space-y-3 sm:space-y-4">
+      {/* Mobile Queue Switcher Tabs for Phones & Small Tablets */}
+      <div className="flex lg:hidden overflow-x-auto gap-1.5 pb-1 no-scrollbar">
+        {[
+          { id: 'all', label: 'All Queues' },
+          { id: 'pending', label: 'New', count: orders.filter((o) => o.status === 'pending').length },
+          { id: 'accepted', label: 'Accepted', count: orders.filter((o) => o.status === 'accepted').length },
+          { id: 'preparing', label: 'In Prep', count: orders.filter((o) => o.status === 'preparing').length },
+          { id: 'ready', label: 'Ready', count: orders.filter((o) => o.status === 'ready').length },
+        ].map((tab) => {
+          const isSelected = mobileColumnTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setMobileColumnTab(tab.id)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                isSelected
+                  ? 'bg-orange-600 text-white shadow-sm ring-1 ring-orange-400'
+                  : 'bg-[#1F1B18] text-stone-400 border border-[#332D28] hover:text-white'
+              }`}
+            >
+              <span>{tab.label}</span>
+              {typeof tab.count === 'number' && (
+                <span
+                  className={`px-1.5 py-0.5 rounded-md text-[10px] font-mono ${
+                    isSelected ? 'bg-black/30 text-white' : 'bg-[#2B2622] text-stone-300'
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Kanban Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full items-start">
         {activeColumns.map((col) => {
@@ -139,10 +175,14 @@ export const KitchenPage: React.FC = () => {
             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
           });
 
+          const isVisibleOnMobile = mobileColumnTab === 'all' || mobileColumnTab === col.status;
+
           return (
             <div
               key={col.status}
-              className="bg-[#181614] border border-[#2B2724] rounded-2xl flex flex-col min-h-[750px] shadow-2xl overflow-hidden"
+              className={`${
+                isVisibleOnMobile ? 'flex' : 'hidden lg:flex'
+              } bg-[#181614] border border-[#2B2724] rounded-2xl flex-col min-h-[220px] lg:min-h-[750px] shadow-2xl overflow-hidden`}
             >
               {/* Column Header */}
               <div className={`p-3.5 border-b border-[#2B2724] flex items-center justify-between ${col.color}`}>
@@ -403,7 +443,7 @@ export const KitchenPage: React.FC = () => {
                 })}
 
                 {colOrders.length === 0 && (
-                  <div className="text-center py-24 text-stone-500 text-xs flex flex-col items-center">
+                  <div className="text-center py-10 lg:py-24 text-stone-500 text-xs flex flex-col items-center">
                     <ChefHat className="w-8 h-8 mb-2 opacity-30" />
                     <span>No tickets in this queue</span>
                   </div>

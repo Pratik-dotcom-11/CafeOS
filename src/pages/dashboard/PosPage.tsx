@@ -292,7 +292,7 @@ export const PosPage: React.FC = () => {
         </div>
 
         {/* Right Section: Invoice & Live Cart Panel (4 Columns matching reference image) */}
-        <div className="xl:col-span-4 bg-white dark:bg-cafe-surface-dark rounded-3xl p-5 border border-cafe-border/80 dark:border-cafe-border-dark shadow-warm sticky top-20">
+        <div id="pos-invoice" className="xl:col-span-4 bg-white dark:bg-cafe-surface-dark rounded-3xl p-5 border border-cafe-border/80 dark:border-cafe-border-dark shadow-warm sticky top-20">
           <div className="flex items-center justify-between pb-4 border-b border-cafe-border/70 dark:border-cafe-border-dark">
             <div className="flex items-center gap-2">
               <Receipt className="w-5 h-5 text-cafe-accent" />
@@ -457,6 +457,27 @@ export const PosPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Mobile Sticky Invoice Trigger Bar */}
+      {cart.length > 0 && (
+        <div className="xl:hidden fixed bottom-4 inset-x-4 z-40 bg-cafe-primary dark:bg-stone-900 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-between border border-cafe-accent/40 backdrop-blur-md">
+          <div>
+            <span className="text-xs text-stone-300 block font-medium">
+              {cart.reduce((sum, item) => sum + item.quantity, 0)} items in invoice
+            </span>
+            <span className="text-base font-black text-cafe-accent">
+              {formatCurrency(cartTotal, restaurant.currencySymbol)}
+            </span>
+          </div>
+          <a
+            href="#pos-invoice"
+            className="px-4 py-2.5 rounded-xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-extrabold text-xs uppercase tracking-wider shadow-md transition-all flex items-center gap-1.5 btn-press"
+          >
+            <span>View Invoice</span>
+            <Receipt className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      )}
     </div>
   );
 };

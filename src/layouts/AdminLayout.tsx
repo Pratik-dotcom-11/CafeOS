@@ -300,7 +300,7 @@ export const AdminLayout: React.FC = () => {
               </button>
 
               {workspaceMenuOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-cafe-surface-dark rounded-2xl shadow-warm-lg border border-cafe-border dark:border-cafe-border-dark p-2.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-cafe-surface-dark rounded-2xl shadow-warm-lg border border-cafe-border dark:border-cafe-border-dark p-2.5 z-50 animate-in fade-in zoom-in-95 duration-150">
                   <div className="px-3 py-2 border-b border-cafe-border dark:border-cafe-border-dark flex items-center justify-between">
                     <span className="text-[11px] font-extrabold uppercase tracking-wider text-cafe-muted">
                       Your Restaurant Workspaces
@@ -402,7 +402,7 @@ export const AdminLayout: React.FC = () => {
               </button>
 
               {notificationsOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-cafe-surface-dark rounded-2xl shadow-warm-lg border border-cafe-border dark:border-cafe-border-dark p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-cafe-surface-dark rounded-2xl shadow-warm-lg border border-cafe-border dark:border-cafe-border-dark p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
                   <div className="flex items-center justify-between pb-3 border-b border-cafe-border dark:border-cafe-border-dark">
                     <span className="font-bold text-sm text-cafe-primary dark:text-cafe-cream">
                       Live Kitchen Activity
@@ -467,7 +467,7 @@ export const AdminLayout: React.FC = () => {
               </button>
 
               {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-60 bg-white dark:bg-cafe-surface-dark rounded-2xl shadow-warm-lg border border-cafe-border dark:border-cafe-border-dark p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute right-0 mt-2 w-60 max-w-[calc(100vw-2rem)] bg-white dark:bg-cafe-surface-dark rounded-2xl shadow-warm-lg border border-cafe-border dark:border-cafe-border-dark p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                   <div className="px-3 py-2 border-b border-cafe-border dark:border-cafe-border-dark mb-1">
                     <p className="text-xs font-bold text-cafe-primary dark:text-cafe-cream truncate">
                       {activeWorkspace?.restaurant_name || restaurant.name}
