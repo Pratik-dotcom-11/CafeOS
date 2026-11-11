@@ -429,7 +429,7 @@ export const CustomerMenuPage: React.FC = () => {
             />
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <h1 className="text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
+                <h1 className="font-display text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
                   {restaurant.name}
                 </h1>
                 {restaurant.cuisine && (
@@ -550,7 +550,7 @@ export const CustomerMenuPage: React.FC = () => {
       {/* Products Grid */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-extrabold text-cafe-primary flex items-center gap-2">
+          <h2 className="font-display text-base sm:text-lg font-extrabold text-cafe-primary flex items-center gap-2">
             <span>
               {selectedCategory === 'all'
                 ? 'Signature Menu Collection'
@@ -681,11 +681,11 @@ export const CustomerMenuPage: React.FC = () => {
                   <div className="p-4 sm:p-5 pt-0 flex items-center justify-between border-t border-cafe-border/50 mt-2">
                     <div>
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-base sm:text-lg font-black text-cafe-primary">
+                        <span className="font-display text-base sm:text-lg font-black text-cafe-primary">
                           {formatCurrency(prod.price, restaurant.currency_symbol || '₹')}
                         </span>
                         {prod.originalPrice && (
-                          <span className="text-xs text-cafe-muted line-through">
+                          <span className="font-display text-xs text-cafe-muted line-through">
                             {formatCurrency(prod.originalPrice, restaurant.currency_symbol || '₹')}
                           </span>
                         )}

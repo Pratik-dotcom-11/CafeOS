@@ -90,7 +90,7 @@ export const CustomerNotificationsPage: React.FC = () => {
             <span className="p-2 rounded-2xl bg-amber-50 text-amber-700 border border-amber-200">
               <Bell className="w-5 h-5" />
             </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-cafe-primary tracking-tight">
+            <h1 className="font-display text-2xl sm:text-3xl font-black text-cafe-primary tracking-tight">
               Order Notifications & Alerts
             </h1>
           </div>

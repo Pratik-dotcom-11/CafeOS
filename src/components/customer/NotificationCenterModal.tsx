@@ -99,7 +99,7 @@ export const NotificationCenterModal: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-black text-cafe-primary">Order Alerts &amp; Updates</h2>
+                <h2 className="font-display text-base font-black text-cafe-primary">Order Alerts &amp; Updates</h2>
                 {unreadNotificationsCount > 0 && (
                   <span className="px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black">
                     {unreadNotificationsCount} new

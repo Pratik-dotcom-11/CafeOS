@@ -177,7 +177,7 @@ export const RestaurantDirectoryPage: React.FC = () => {
             {restaurants.length} Verified Culinary Partners
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black text-cafe-primary tracking-tight">
+        <h1 className="font-display text-2xl sm:text-3xl font-black text-cafe-primary tracking-tight">
           Explore Restaurants & Dining Partners
         </h1>
         <p className="text-xs sm:text-sm text-cafe-muted max-w-2xl">

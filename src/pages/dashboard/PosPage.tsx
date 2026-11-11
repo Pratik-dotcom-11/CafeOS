@@ -253,11 +253,11 @@ export const PosPage: React.FC = () => {
                         {product.name}
                       </h3>
                       <div className="flex items-center justify-center gap-2 mt-1">
-                        <span className="text-base font-extrabold text-cafe-accent">
+                        <span className="font-display text-base font-extrabold text-cafe-accent">
                           {formatCurrency(product.price, restaurant.currencySymbol)}
                         </span>
                         {product.originalPrice && (
-                          <span className="text-xs text-stone-400 line-through">
+                          <span className="font-display text-xs text-stone-400 line-through">
                             {formatCurrency(product.originalPrice, restaurant.currencySymbol)}
                           </span>
                         )}
@@ -296,7 +296,7 @@ export const PosPage: React.FC = () => {
           <div className="flex items-center justify-between pb-4 border-b border-cafe-border/70 dark:border-cafe-border-dark">
             <div className="flex items-center gap-2">
               <Receipt className="w-5 h-5 text-cafe-accent" />
-              <h2 className="text-lg font-extrabold text-cafe-primary dark:text-cafe-cream">
+              <h2 className="font-display text-lg font-extrabold text-cafe-primary dark:text-cafe-cream">
                 Invoice & Active Order
               </h2>
             </div>
@@ -409,7 +409,7 @@ export const PosPage: React.FC = () => {
             </div>
             <div className="flex justify-between text-sm font-extrabold text-cafe-primary dark:text-cafe-cream pt-2 border-t border-dashed border-cafe-border dark:border-cafe-border-dark">
               <span>Total Payment</span>
-              <span className="text-cafe-accent text-base">
+              <span className="font-display font-extrabold text-cafe-accent text-base">
                 {formatCurrency(cartTotal, restaurant.currencySymbol)}
               </span>
             </div>
@@ -450,7 +450,7 @@ export const PosPage: React.FC = () => {
           <button
             onClick={handlePlaceOrder}
             disabled={cart.length === 0}
-            className="w-full mt-5 py-3.5 px-4 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-extrabold text-sm shadow-warm-md hover:shadow-warm-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+            className="w-full mt-5 py-3.5 px-4 rounded-2xl bg-cafe-accent hover:bg-cafe-accent-hover text-white font-extrabold text-sm shadow-warm-md hover:shadow-warm-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 btn-press"
           >
             <Sparkles className="w-4 h-4" />
             <span>Place Order • {formatCurrency(cartTotal, restaurant.currencySymbol)}</span>

@@ -92,7 +92,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-base font-black text-cafe-primary dark:text-cafe-cream">
+            <h3 className="font-display text-base font-black text-cafe-primary dark:text-cafe-cream">
               Rate Your Dining Experience
             </h3>
             <p className="text-xs text-cafe-muted mt-0.5">

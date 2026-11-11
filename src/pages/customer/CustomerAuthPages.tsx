@@ -70,7 +70,7 @@ export const CustomerLoginPage: React.FC = () => {
           <div className="flex justify-center">
             <CafeLogo size={46} />
           </div>
-          <h1 className="text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
+          <h1 className="font-display text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
             Welcome to CaféOS Dining
           </h1>
           <p className="text-xs text-cafe-muted">
@@ -282,7 +282,7 @@ export const CustomerRegisterPage: React.FC = () => {
             <Sparkles className="w-3 h-3 text-amber-600 fill-amber-600" />
             <span>Bonus 100 Loyalty Coins on Signup</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
+          <h1 className="font-display text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
             Create Diner Account
           </h1>
           <p className="text-xs text-cafe-muted">

@@ -65,7 +65,7 @@ export const CustomerOnboardingPage: React.FC = () => {
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
             <span>Google Account Verified</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
+          <h1 className="font-display text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
             Complete Your Diner Profile
           </h1>
           <p className="text-xs text-cafe-muted">

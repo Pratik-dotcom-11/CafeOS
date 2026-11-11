@@ -157,7 +157,7 @@ export const CustomerOrdersPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-cafe-primary tracking-tight">
+          <h1 className="font-display text-2xl font-black text-cafe-primary tracking-tight">
             My Orders & Dining Receipts
           </h1>
           <p className="text-xs text-cafe-muted mt-0.5">
@@ -232,7 +232,7 @@ export const CustomerOrdersPage: React.FC = () => {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-black text-cafe-primary">
+                        <span className="font-display text-sm font-bold text-cafe-primary">
                           {ord.orderNumber}
                         </span>
                         <span className="text-xs font-bold text-cafe-muted">•</span>
@@ -292,7 +292,7 @@ export const CustomerOrdersPage: React.FC = () => {
                     <span className="text-[10px] font-bold text-cafe-muted uppercase tracking-wider block">
                       Total Bill Amount
                     </span>
-                    <span className="text-lg font-black text-cafe-primary">
+                    <span className="font-display text-lg font-black text-cafe-primary">
                       {formatCurrency(ord.total, '₹')}
                     </span>
                     <span className="text-[11px] text-emerald-700 font-semibold ml-2">

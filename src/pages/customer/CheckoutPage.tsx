@@ -260,7 +260,7 @@ export const CheckoutPage: React.FC = () => {
           <ChevronLeft className="w-4 h-4" />
           <span>Back to Order Bag</span>
         </NavLink>
-        <h1 className="text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
+        <h1 className="font-display text-xl sm:text-2xl font-black text-cafe-primary tracking-tight">
           Checkout &amp; Order Confirmation
         </h1>
         <p className="text-xs text-cafe-muted mt-0.5">
@@ -604,7 +604,7 @@ export const CheckoutPage: React.FC = () => {
 
           <div className="flex justify-between text-base font-black text-cafe-primary pt-2 border-t border-dashed border-cafe-border">
             <span>Total Payable Amount</span>
-            <span className="text-cafe-accent text-lg">
+            <span className="font-display font-extrabold text-cafe-accent text-lg">
               {formatCurrency(payableTotal, currencySymbol)}
             </span>
           </div>

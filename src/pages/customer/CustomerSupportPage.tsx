@@ -165,7 +165,7 @@ export const CustomerSupportPage: React.FC = () => {
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-cafe-primary tracking-tight">Customer Care & Support</h1>
+          <h1 className="font-display text-2xl font-black text-cafe-primary tracking-tight">Customer Care & Support</h1>
           <p className="text-xs text-cafe-muted mt-0.5">
             We are here to help. Report order issues or contact our dedicated dining support team.
           </p>

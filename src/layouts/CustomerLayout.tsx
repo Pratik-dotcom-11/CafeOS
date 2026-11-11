@@ -36,7 +36,7 @@ export const CustomerLayout: React.FC = () => {
             )}
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-base lg:text-lg tracking-tight text-cafe-primary dark:text-stone-100">
+                <h1 className="font-display font-bold text-base lg:text-lg tracking-tight text-cafe-primary dark:text-stone-100">
                   {restaurant.name}
                 </h1>
                 <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-semibold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded-full border border-amber-200 dark:border-amber-900">
@@ -58,7 +58,7 @@ export const CustomerLayout: React.FC = () => {
           <div className="flex items-center gap-2">
             <NavLink
               to="/cart"
-              className="relative flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cafe-primary text-white dark:bg-cafe-accent shadow-warm hover:opacity-90 transition-all font-medium text-sm"
+              className="relative flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cafe-primary text-white dark:bg-cafe-accent shadow-warm hover:opacity-90 transition-all font-medium text-sm btn-press"
             >
               <ShoppingBag className="w-4 h-4" />
               <span className="hidden sm:inline">Order Bag</span>
@@ -92,7 +92,7 @@ export const CustomerLayout: React.FC = () => {
         <div className="fixed bottom-4 inset-x-4 max-w-lg mx-auto z-40 md:hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
           <NavLink
             to="/cart"
-            className="flex items-center justify-between p-4 bg-cafe-primary text-white rounded-2xl shadow-warm-lg border border-cafe-accent/40"
+            className="flex items-center justify-between p-4 bg-cafe-primary text-white rounded-2xl shadow-warm-lg border border-cafe-accent/40 btn-press"
           >
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-cafe-accent flex items-center justify-center font-bold text-sm">
@@ -100,7 +100,7 @@ export const CustomerLayout: React.FC = () => {
               </div>
               <div>
                 <p className="text-xs text-cafe-cream/80 uppercase font-semibold">Your Order</p>
-                <p className="text-sm font-bold">{formatCurrency(cartSubtotal, restaurant.currencySymbol || '₹')}</p>
+                <p className="font-display text-sm font-bold">{formatCurrency(cartSubtotal, restaurant.currencySymbol || '₹')}</p>
               </div>
             </div>
             <div className="flex items-center gap-1 text-sm font-bold text-cafe-cream">
@@ -114,7 +114,7 @@ export const CustomerLayout: React.FC = () => {
       {/* Subtle Footer */}
       <footer className="border-t border-cafe-border/80 dark:border-stone-800 bg-white/60 dark:bg-stone-900/40 py-6 text-center text-xs text-cafe-muted dark:text-stone-500">
         <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>© 2026 {restaurant.name}. Powered by <span className="font-bold text-cafe-primary dark:text-stone-300">CaféOS</span>.</p>
+          <p>© 2026 {restaurant.name}. Powered by <span className="font-display font-bold text-cafe-primary dark:text-stone-300">CaféOS</span>.</p>
           <div className="flex items-center gap-4 text-xs font-medium">
             <NavLink to="/dashboard" className="text-cafe-accent hover:underline">
               Staff Portal Login

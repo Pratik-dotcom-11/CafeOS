@@ -127,7 +127,7 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
               </svg>
             </div>
             <div>
-              <h2 className="text-base font-bold text-stone-900 tracking-tight">
+              <h2 className="font-display text-base font-bold text-stone-900 tracking-tight">
                 Sign in with Google
               </h2>
               <p className="text-xs text-stone-500">
