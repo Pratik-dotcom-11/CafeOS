@@ -326,7 +326,7 @@ export const KitchenPage: React.FC = () => {
                           <>
                             <button
                               onClick={() => updateOrderStatus(order.id, 'accepted')}
-                              className="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                              className="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 btn-press"
                             >
                               <Check className="w-4 h-4" />
                               <span>Accept Ticket</span>
@@ -334,7 +334,7 @@ export const KitchenPage: React.FC = () => {
                             <button
                               onClick={() => setRejectingOrder(order)}
                               title="Reject / 86 Order"
-                              className="px-3 py-3 rounded-xl border border-rose-800/60 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 text-xs font-bold transition-all"
+                              className="px-3 py-3 rounded-xl border border-rose-800/60 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 text-xs font-bold transition-all btn-press"
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -345,7 +345,7 @@ export const KitchenPage: React.FC = () => {
                           <>
                             <button
                               onClick={() => updateOrderStatus(order.id, 'preparing')}
-                              className="flex-1 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                              className="flex-1 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 btn-press"
                             >
                               <Flame className="w-4 h-4" />
                               <span>Start Prep</span>
@@ -353,7 +353,7 @@ export const KitchenPage: React.FC = () => {
                             <button
                               onClick={() => setRejectingOrder(order)}
                               title="Reject / 86 Order"
-                              className="px-3 py-3 rounded-xl border border-rose-800/60 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 text-xs font-bold transition-all"
+                              className="px-3 py-3 rounded-xl border border-rose-800/60 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 text-xs font-bold transition-all btn-press"
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -364,7 +364,7 @@ export const KitchenPage: React.FC = () => {
                           <>
                             <button
                               onClick={() => updateOrderStatus(order.id, 'ready')}
-                              className="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                              className="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 btn-press"
                             >
                               <CheckCircle2 className="w-4 h-4" />
                               <span>Mark as Ready</span>
@@ -372,7 +372,7 @@ export const KitchenPage: React.FC = () => {
                             <button
                               onClick={() => setRejectingOrder(order)}
                               title="Cancel / 86 Ticket"
-                              className="px-3 py-3 rounded-xl border border-rose-800/60 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 text-xs font-bold transition-all"
+                              className="px-3 py-3 rounded-xl border border-rose-800/60 bg-rose-950/30 text-rose-300 hover:bg-rose-900/50 text-xs font-bold transition-all btn-press"
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -383,7 +383,7 @@ export const KitchenPage: React.FC = () => {
                           <>
                             <button
                               onClick={() => updateOrderStatus(order.id, 'completed')}
-                              className="flex-1 py-3 rounded-xl bg-stone-700 hover:bg-stone-600 text-stone-100 font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                              className="flex-1 py-3 rounded-xl bg-stone-700 hover:bg-stone-600 text-stone-100 font-black text-xs uppercase tracking-wider shadow-md transition-all flex items-center justify-center gap-1.5 btn-press"
                             >
                               <Utensils className="w-4 h-4" />
                               <span>Order Served</span>
@@ -391,7 +391,7 @@ export const KitchenPage: React.FC = () => {
                             <button
                               onClick={() => updateOrderStatus(order.id, 'preparing', 'Remake requested')}
                               title="Send back to cooking / remake"
-                              className="px-3 py-3 rounded-xl border border-[#3A332E] bg-[#292420] text-amber-300 hover:bg-[#342D27] text-xs font-bold transition-all"
+                              className="px-3 py-3 rounded-xl border border-[#3A332E] bg-[#292420] text-amber-300 hover:bg-[#342D27] text-xs font-bold transition-all btn-press"
                             >
                               <Undo2 className="w-4 h-4" />
                             </button>

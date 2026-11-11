@@ -263,7 +263,7 @@ export const AnalyticsPage: React.FC = () => {
       {report && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Total Revenue (Net + Tax) */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive hover:-translate-y-1 transition-all">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-cafe-muted">
                 Total Gross Revenue
@@ -272,7 +272,7 @@ export const AnalyticsPage: React.FC = () => {
                 <IndianRupee className="w-4 h-4" />
               </div>
             </div>
-            <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream mt-2">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream mt-2">
               {formatCurrency(report.summary.totalRevenue, restaurant.currencySymbol)}
             </h3>
             <p className="text-xs mt-1.5 flex items-center gap-1 font-semibold">
@@ -291,7 +291,7 @@ export const AnalyticsPage: React.FC = () => {
           </div>
 
           {/* Card 2: Net Sales vs Discounts */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive hover:-translate-y-1 transition-all">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-cafe-muted">
                 Net Food Sales (Excl. Tax)
@@ -300,7 +300,7 @@ export const AnalyticsPage: React.FC = () => {
                 <TrendingUp className="w-4 h-4" />
               </div>
             </div>
-            <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream mt-2">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream mt-2">
               {formatCurrency(report.summary.netSales, restaurant.currencySymbol)}
             </h3>
             <p className="text-[11px] text-cafe-muted font-medium mt-1.5 flex items-center gap-1">
@@ -313,7 +313,7 @@ export const AnalyticsPage: React.FC = () => {
           </div>
 
           {/* Card 3: Average Order Value (AOV) */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive hover:-translate-y-1 transition-all">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-cafe-muted">
                 Avg. Ticket Size (AOV)
@@ -322,7 +322,7 @@ export const AnalyticsPage: React.FC = () => {
                 <Percent className="w-4 h-4" />
               </div>
             </div>
-            <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream mt-2">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream mt-2">
               {formatCurrency(report.summary.averageOrderValue, restaurant.currencySymbol)}
             </h3>
             <p className="text-xs text-cafe-muted font-medium mt-1.5">
@@ -331,7 +331,7 @@ export const AnalyticsPage: React.FC = () => {
           </div>
 
           {/* Card 4: Orders Volume & Cancellations */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm">
+          <div className="p-5 rounded-3xl bg-white dark:bg-cafe-surface-dark border border-cafe-border dark:border-cafe-border-dark shadow-warm card-interactive hover:-translate-y-1 transition-all">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-cafe-muted">
                 Orders & Fulfillment
@@ -341,7 +341,7 @@ export const AnalyticsPage: React.FC = () => {
               </div>
             </div>
             <div className="flex items-baseline justify-between mt-2">
-              <h3 className="text-2xl font-black text-cafe-primary dark:text-cafe-cream">
+              <h3 className="font-display text-2xl font-bold tracking-tight text-cafe-primary dark:text-cafe-cream">
                 {report.summary.completedOrders}{' '}
                 <span className="text-xs text-cafe-muted font-semibold">/ {report.summary.totalOrders} total</span>
               </h3>

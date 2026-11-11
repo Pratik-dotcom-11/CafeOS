@@ -182,11 +182,11 @@ export const CustomerProfilePage: React.FC = () => {
         </div>
 
         {/* Loyalty Balance Mini Widget */}
-        <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-center sm:text-right shrink-0">
+        <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-center sm:text-right shrink-0 shadow-sm">
           <p className="text-[10px] font-bold text-amber-800 uppercase tracking-wider">Loyalty Coin Balance</p>
           <p className="text-2xl font-black text-amber-900 mt-0.5 flex items-center justify-center sm:justify-end gap-1">
-            <Sparkles className="w-5 h-5 text-amber-600 fill-amber-600" />
-            <span>{rewards?.pointsBalance ?? 100}</span>
+            <Sparkles className="w-5 h-5 text-amber-600 fill-amber-600 animate-pulse" />
+            <span className="font-display font-extrabold">{rewards?.pointsBalance ?? 100}</span>
           </p>
         </div>
       </div>
