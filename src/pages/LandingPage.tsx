@@ -331,12 +331,7 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-6">
           {/* Logo & Brand */}
           <NavLink to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0 mr-2 sm:mr-4">
-            <div className="sm:hidden shrink-0">
-              <CafeLogo size={32} />
-            </div>
-            <div className="hidden sm:block shrink-0">
-              <CafeLogo size={40} />
-            </div>
+            <CafeLogo size={36} className="shrink-0" />
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-black text-xl sm:text-2xl tracking-tight text-cafe-primary dark:text-white">

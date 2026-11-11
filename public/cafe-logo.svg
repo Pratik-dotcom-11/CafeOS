@@ -14,32 +14,37 @@
       <stop offset="100%" stop-color="#F5EBE1" />
     </linearGradient>
     <radialGradient id="glow" cx="50%" cy="55%" r="45%">
-      <stop offset="0%" stop-color="#D97736" stop-opacity="0.28" />
+      <stop offset="0%" stop-color="#D97736" stop-opacity="0.32" />
       <stop offset="100%" stop-color="#D97736" stop-opacity="0" />
     </radialGradient>
   </defs>
 
-  <!-- Squircle Base with Luxury Border -->
-  <rect x="2" y="2" width="116" height="116" rx="28" fill="url(#bgGrad)" stroke="#D97736" stroke-width="2" stroke-opacity="0.3" />
+  <!-- Solid Dark Espresso Squircle Base -->
+  <rect x="2" y="2" width="116" height="116" rx="28" fill="#241813" />
+
+  <!-- Squircle Base with Luxury Border and Gradient -->
+  <rect x="2" y="2" width="116" height="116" rx="28" fill="url(#bgGrad)" stroke="#D97736" stroke-width="2.5" stroke-opacity="0.4" />
   
   <!-- Subtle Ambient Glow -->
   <circle cx="60" cy="65" r="42" fill="url(#glow)" />
 
   <!-- Steam Lines: Elegant, Minimalist Dual Waves -->
-  <path d="M48 30 C 44 38, 54 44, 48 52" stroke="url(#accentGrad)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.9" />
-  <path d="M62 25 C 57 34, 69 41, 63 52" stroke="url(#creamGrad)" stroke-width="3.5" stroke-linecap="round" fill="none" />
-  <path d="M74 32 C 71 39, 79 44, 76 52" stroke="url(#accentGrad)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8" />
+  <path d="M48 30 C 44 38, 54 44, 48 52" stroke="#F28E46" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.9" />
+  <path d="M62 25 C 57 34, 69 41, 63 52" stroke="#FFF8F0" stroke-width="3.5" stroke-linecap="round" fill="none" />
+  <path d="M74 32 C 71 39, 79 44, 76 52" stroke="#F28E46" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.85" />
 
   <!-- Minimalist Coffee Cup Body -->
+  <path d="M33 56 H82 C82 73 72 84 57.5 84 C43 84 33 73 33 56 Z" fill="#FFF8F0" />
   <path d="M33 56 H82 C82 73 72 84 57.5 84 C43 84 33 73 33 56 Z" fill="url(#creamGrad)" />
 
   <!-- Elegant Interior Crema Layer -->
-  <path d="M36 58 H79 C78 68 70 76 57.5 76 C45 76 37 68 36 58 Z" fill="#2E1E17" opacity="0.12" />
+  <path d="M36 58 H79 C78 68 70 76 57.5 76 C45 76 37 68 36 58 Z" fill="#2E1E17" opacity="0.16" />
 
   <!-- Minimal Handle -->
-  <path d="M82 60 C89 60 94 63.5 94 69 C94 74.5 89 78 82 78" stroke="url(#creamGrad)" stroke-width="4.5" stroke-linecap="round" fill="none" />
+  <path d="M82 60 C89 60 94 63.5 94 69 C94 74.5 89 78 82 78" stroke="#FFF8F0" stroke-width="4.5" stroke-linecap="round" fill="none" />
 
   <!-- Refined Saucer Base -->
+  <rect x="30" y="89" width="55" height="4.5" rx="2.25" fill="#D97736" />
   <rect x="30" y="89" width="55" height="4.5" rx="2.25" fill="url(#accentGrad)" />
 
   <!-- Sparkle Accent: Hospitality Spark -->
