@@ -328,13 +328,18 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-cafe-light text-cafe-primary antialiased selection:bg-cafe-accent selection:text-white">
       {/* 1. TOP STICKY NAVBAR */}
       <header className="sticky top-0 z-50 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md border-b border-cafe-border/80 dark:border-stone-800 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-6">
           {/* Logo & Brand */}
-          <NavLink to="/" className="flex items-center gap-3 group">
-            <CafeLogo size={42} />
+          <NavLink to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0 mr-2 sm:mr-4">
+            <div className="sm:hidden shrink-0">
+              <CafeLogo size={32} />
+            </div>
+            <div className="hidden sm:block shrink-0">
+              <CafeLogo size={40} />
+            </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-black text-2xl tracking-tight text-cafe-primary dark:text-white">
+                <span className="font-black text-xl sm:text-2xl tracking-tight text-cafe-primary dark:text-white">
                   Café<span className="text-cafe-accent">OS</span>
                 </span>
                 <span className="hidden md:inline-flex text-[10px] font-black px-2 py-0.5 rounded-full bg-cafe-accent/15 text-cafe-accent uppercase tracking-wider border border-cafe-accent/20">
@@ -367,10 +372,11 @@ export const LandingPage: React.FC = () => {
           </nav>
 
           {/* Action CTAs: Direct access to Customer Portal, Auth, and Dashboard */}
-          <div className="flex items-center gap-1.5 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 ml-auto">
             <NavLink
               to={isAuthenticated ? '/customer' : '/customer/login'}
-              className="text-xs font-extrabold text-cafe-accent hover:text-cafe-primary dark:text-amber-400 dark:hover:text-white transition-colors px-2.5 sm:px-3 py-2 rounded-xl hover:bg-cafe-sand/50 flex items-center gap-1.5 border border-cafe-accent/30 shadow-sm btn-press"
+              className="text-xs font-extrabold text-cafe-accent hover:text-cafe-primary dark:text-amber-400 dark:hover:text-white transition-colors px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl hover:bg-cafe-sand/50 flex items-center gap-1.5 border border-cafe-accent/30 shadow-sm btn-press"
+              title="Customer Portal"
             >
               <Utensils className="w-3.5 h-3.5 shrink-0" />
               <span className="hidden sm:inline">Customer Portal</span>
@@ -379,7 +385,7 @@ export const LandingPage: React.FC = () => {
 
             <NavLink
               to={isAuthenticated && isStaff ? '/dashboard' : '/login'}
-              className="relative group px-3 sm:px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cafe-accent to-amber-600 hover:from-amber-600 hover:to-cafe-accent text-white text-xs font-black shadow-warm hover:shadow-warm-md transition-all flex items-center gap-1.5 sm:gap-2 btn-press"
+              className="relative group px-2.5 sm:px-5 py-1.5 sm:py-2.5 rounded-2xl bg-gradient-to-r from-cafe-accent to-amber-600 hover:from-amber-600 hover:to-cafe-accent text-white text-xs font-black shadow-warm hover:shadow-warm-md transition-all flex items-center gap-1.5 sm:gap-2 btn-press"
             >
               <Store className="w-3.5 h-3.5 shrink-0" />
               <span className="hidden sm:inline">Restaurant Portal</span>
