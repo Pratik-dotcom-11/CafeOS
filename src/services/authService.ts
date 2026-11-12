@@ -75,17 +75,17 @@ export const authService = {
   },
 
   /**
-   * Direct customer sign-in or registration with a Gmail / Google account.
-   * Allows diners to sign in or register instantly with their Gmail address,
-   * automatically provisioning their customer_profiles row and crediting 100 loyalty welcome coins.
+   * Direct customer or restaurant staff sign-in / registration with a Gmail / Google account.
+   * Allows users to sign in or register instantly with their Gmail address,
+   * automatically provisioning their profile and granting appropriate role access.
    */
-  async signInWithGmail(email: string, fullName?: string, phone?: string) {
+  async signInWithGmail(email: string, fullName?: string, phone?: string, portal: 'customer' | 'restaurant' = 'customer') {
     const normalizedEmail = email.trim().toLowerCase();
     if (!normalizedEmail || !normalizedEmail.includes('@')) {
       throw new Error('Please enter a valid Gmail address.');
     }
 
-    // Deterministic secure token for one-tap customer Gmail authentication
+    // Deterministic secure token for one-tap customer/staff Gmail authentication
     const base64Part = btoa(normalizedEmail).replace(/[^a-zA-Z0-9]/g, '').slice(0, 16);
     const deterministicKey = `CafeOS_Gmail@${base64Part}`;
 
@@ -100,7 +100,7 @@ export const authService = {
     if (!res1.error && res1.data?.session) {
       data = res1.data;
     } else {
-      // 2. If password differs (e.g. demo customer account), try demo password
+      // 2. If password differs (e.g. demo staff/customer account), try demo password
       const res2 = await supabase.auth.signInWithPassword({
         email: normalizedEmail,
         password: 'SecurePassword@2026',
@@ -117,7 +117,7 @@ export const authService = {
             data: {
               full_name: fullName || normalizedEmail.split('@')[0],
               phone: phone || '',
-              account_type: 'customer',
+              account_type: portal === 'restaurant' ? 'staff' : 'customer',
             },
           },
         });
@@ -140,7 +140,7 @@ export const authService = {
       }
     }
 
-    // 4. Ensure customer profile and welcome rewards exist in database
+    // 4. Ensure customer profile and rewards or restaurant membership exist in database
     if (data?.user) {
       const user = data.user;
       const derivedName = fullName || user.user_metadata?.full_name || normalizedEmail.split('@')[0];
@@ -159,7 +159,16 @@ export const authService = {
           tier: 'Bronze',
         });
       } catch (profileErr) {
-        console.warn('Customer profile sync notice:', profileErr);
+        console.warn('Profile sync notice:', profileErr);
+      }
+
+      // If logging into the restaurant portal, ensure active owner membership in demo workspace
+      if (portal === 'restaurant') {
+        try {
+          await (supabase.rpc as any)('ensure_restaurant_owner_access', { p_user_id: user.id });
+        } catch (memberErr) {
+          console.warn('Restaurant owner access notice:', memberErr);
+        }
       }
     }
 
