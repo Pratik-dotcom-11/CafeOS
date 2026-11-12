@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, User, Mail, Sparkles, ArrowRight, ShieldCheck, AlertCircle, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { X, User, Sparkles, ArrowRight, ShieldCheck, AlertCircle, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,15 +7,19 @@ interface GoogleSignInModalProps {
   isOpen: boolean;
   onClose: () => void;
   redirectUrl?: string;
+  portal?: 'customer' | 'restaurant';
 }
 
 export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
   isOpen,
   onClose,
-  redirectUrl = '/customer',
+  redirectUrl,
+  portal = 'customer',
 }) => {
   const { signInWithGmail, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+
+  const targetRedirect = redirectUrl || (portal === 'restaurant' ? '/dashboard' : '/customer');
 
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
   const [customEmail, setCustomEmail] = useState('');
@@ -27,30 +31,50 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Preset quick Google/Gmail diner accounts
-  const quickAccounts = [
-    {
-      name: 'Pratik Ghosh',
-      email: 'pratik.ghosh@gmail.com',
-      avatarColor: 'bg-emerald-600',
-      tag: 'Owner / Diner',
-    },
-    {
-      name: 'Rahul Sharma',
-      email: 'rahul.sharma5054@gmail.com',
-      avatarColor: 'bg-blue-600',
-      tag: 'Managing Partner & Diner',
-    },
-  ];
+  // Preset quick Google/Gmail accounts based on portal context
+  const quickAccounts =
+    portal === 'restaurant'
+      ? [
+          {
+            name: 'Rahul Sharma',
+            email: 'rahul.sharma5054@gmail.com',
+            avatarColor: 'bg-blue-600',
+            tag: 'Restaurant Owner & General Manager',
+            roleDesc: 'Arsalan Flagship & 10 Hubs (Owner Access)',
+          },
+          {
+            name: 'Pratik Ghosh',
+            email: 'pratik.ghosh@gmail.com',
+            avatarColor: 'bg-emerald-600',
+            tag: 'Executive Operations & Partner',
+            roleDesc: 'Kolkata Hospitality Network (Owner Access)',
+          },
+        ]
+      : [
+          {
+            name: 'Pratik Ghosh',
+            email: 'pratik.ghosh@gmail.com',
+            avatarColor: 'bg-emerald-600',
+            tag: 'Owner / Diner',
+            roleDesc: 'Dine-In Customer Account',
+          },
+          {
+            name: 'Rahul Sharma',
+            email: 'rahul.sharma5054@gmail.com',
+            avatarColor: 'bg-blue-600',
+            tag: 'Managing Partner & Diner',
+            roleDesc: 'Verified Diner Profile',
+          },
+        ];
 
   const handleAccountSelect = async (accountEmail: string, accountName: string) => {
     setErrorMsg(null);
     setIsLoading(true);
     setSelectedEmail(accountEmail);
     try {
-      await signInWithGmail(accountEmail, accountName);
+      await signInWithGmail(accountEmail, accountName, '', portal);
       onClose();
-      navigate(redirectUrl, { replace: true });
+      navigate(targetRedirect, { replace: true });
     } catch (err: any) {
       console.error('Gmail login failed:', err);
       setErrorMsg(err.message || 'Unable to sign in with this Gmail account.');
@@ -70,9 +94,9 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
     setIsLoading(true);
     try {
       const derivedName = customName.trim() || customEmail.split('@')[0];
-      await signInWithGmail(customEmail.trim(), derivedName);
+      await signInWithGmail(customEmail.trim(), derivedName, '', portal);
       onClose();
-      navigate(redirectUrl, { replace: true });
+      navigate(targetRedirect, { replace: true });
     } catch (err: any) {
       console.error('Custom Gmail login failed:', err);
       setErrorMsg(err.message || 'Failed to authenticate Gmail account.');
@@ -85,12 +109,12 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
     setErrorMsg(null);
     setIsLoading(true);
     try {
-      await signInWithGoogle('customer', redirectUrl);
+      await signInWithGoogle(portal, targetRedirect);
     } catch (err: any) {
       console.warn('OAuth redirect exception:', err);
       setErrorMsg(
         err.message?.includes('provider is not enabled')
-          ? 'Google OAuth provider is not yet enabled in Supabase Cloud Dashboard. Please select an instant Gmail account above!'
+          ? 'Google OAuth provider is not yet enabled in Supabase Cloud Dashboard. Please select an instant Google account above!'
           : (err.message || 'OAuth redirect failed')
       );
       setIsLoading(false);
@@ -100,13 +124,13 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden transform transition-all"
+        className="w-full max-w-md bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden transform transition-all text-stone-900 dark:text-stone-100"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header with Google Branding */}
-        <div className="p-6 pb-4 border-b border-stone-100 flex items-start justify-between">
+        <div className="p-6 pb-4 border-b border-stone-100 dark:border-stone-800 flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-stone-50 border border-stone-200 flex items-center justify-center shadow-sm">
+            <div className="w-10 h-10 rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 flex items-center justify-center shadow-sm">
               <svg className="w-6 h-6" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
@@ -127,18 +151,21 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
               </svg>
             </div>
             <div>
-              <h2 className="font-display text-base font-bold text-stone-900 tracking-tight">
+              <h2 className="font-display text-base font-bold text-stone-900 dark:text-stone-100 tracking-tight">
                 Sign in with Google
               </h2>
-              <p className="text-xs text-stone-500">
-                to continue to <span className="font-semibold text-cafe-primary">CaféOS Dining</span>
+              <p className="text-xs text-stone-500 dark:text-stone-400">
+                to continue to{' '}
+                <span className="font-semibold text-cafe-primary dark:text-orange-400">
+                  {portal === 'restaurant' ? 'CaféOS Restaurant Cloud' : 'CaféOS Dining'}
+                </span>
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
             disabled={isLoading}
-            className="p-1.5 rounded-full text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition-colors"
+            className="p-1.5 rounded-full text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -147,14 +174,14 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
         {/* Modal Body */}
         <div className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
           {errorMsg && (
-            <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2">
+            <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-400 text-xs flex items-start gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{errorMsg}</span>
             </div>
           )}
 
-          <p className="text-xs font-semibold text-stone-700">
-            Choose an account
+          <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
+            {portal === 'restaurant' ? 'Select Verified Staff / Owner Account' : 'Choose an account'}
           </p>
 
           {/* Quick Account Options */}
@@ -167,30 +194,30 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
                   type="button"
                   onClick={() => handleAccountSelect(acc.email, acc.name)}
                   disabled={isLoading}
-                  className="w-full p-3.5 rounded-2xl border border-stone-200 hover:border-cafe-accent/60 bg-white hover:bg-stone-50/80 transition-all flex items-center justify-between text-left group disabled:opacity-60"
+                  className="w-full p-3.5 rounded-2xl border border-stone-200 dark:border-stone-800 hover:border-cafe-accent/60 bg-white dark:bg-stone-850 hover:bg-stone-50/80 dark:hover:bg-stone-800 transition-all flex items-center justify-between text-left group disabled:opacity-60"
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-full ${acc.avatarColor} text-white font-bold text-sm flex items-center justify-center shadow-sm`}>
+                    <div className={`w-9 h-9 rounded-full ${acc.avatarColor} text-white font-bold text-sm flex items-center justify-center shadow-sm shrink-0`}>
                       {acc.name[0]}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-stone-900 group-hover:text-cafe-primary">
+                        <span className="text-xs font-bold text-stone-900 dark:text-stone-100 group-hover:text-cafe-primary dark:group-hover:text-orange-400">
                           {acc.name}
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-stone-100 text-stone-600 font-medium">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 font-medium">
                           {acc.tag}
                         </span>
                       </div>
-                      <span className="text-xs text-stone-500 block">
+                      <span className="text-xs text-stone-500 dark:text-stone-400 block">
                         {acc.email}
                       </span>
                     </div>
                   </div>
                   {isThisLoading ? (
-                    <div className="w-4 h-4 border-2 border-cafe-accent border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-cafe-accent border-t-transparent rounded-full animate-spin shrink-0" />
                   ) : (
-                    <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-cafe-accent group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-cafe-accent group-hover:translate-x-0.5 transition-all shrink-0" />
                   )}
                 </button>
               );
@@ -203,26 +230,26 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowCustomInput(true)}
-                className="w-full py-2.5 px-3 rounded-2xl border border-dashed border-stone-300 hover:border-stone-400 text-xs font-semibold text-stone-700 hover:bg-stone-50 flex items-center justify-center gap-2 transition-all"
+                className="w-full py-2.5 px-3 rounded-2xl border border-dashed border-stone-300 dark:border-stone-700 hover:border-stone-400 text-xs font-semibold text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <User className="w-3.5 h-3.5 text-stone-500" />
                 <span>Use another Google / Gmail account</span>
               </button>
             ) : (
-              <form onSubmit={handleCustomSubmit} className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
+              <form onSubmit={handleCustomSubmit} className="p-4 rounded-2xl bg-stone-50 dark:bg-stone-850 border border-stone-200 dark:border-stone-750 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-stone-800">Enter Gmail Details</span>
+                  <span className="text-xs font-bold text-stone-800 dark:text-stone-200">Enter Gmail Details</span>
                   <button
                     type="button"
                     onClick={() => setShowCustomInput(false)}
-                    className="text-[11px] text-stone-500 hover:text-stone-700 underline"
+                    className="text-[11px] text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 underline cursor-pointer"
                   >
                     Cancel
                   </button>
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-stone-600 block mb-1">
+                  <label className="text-[11px] font-bold text-stone-600 dark:text-stone-400 block mb-1">
                     Your Name
                   </label>
                   <input
@@ -230,12 +257,12 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
                     value={customName}
                     onChange={(e) => setCustomName(e.target.value)}
                     placeholder="e.g. Pratik Ghosh"
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-stone-200 bg-white focus:outline-none focus:border-cafe-accent"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 focus:outline-none focus:border-cafe-accent"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-stone-600 block mb-1">
+                  <label className="text-[11px] font-bold text-stone-600 dark:text-stone-400 block mb-1">
                     Gmail Address
                   </label>
                   <input
@@ -244,14 +271,14 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
                     onChange={(e) => setCustomEmail(e.target.value)}
                     placeholder="name@gmail.com"
                     required
-                    className="w-full px-3 py-2 text-xs rounded-xl border border-stone-200 bg-white focus:outline-none focus:border-cafe-accent"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 focus:outline-none focus:border-cafe-accent"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-2.5 rounded-xl bg-cafe-primary hover:bg-cafe-accent text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-2.5 rounded-xl bg-cafe-primary hover:bg-cafe-accent text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                 >
                   {isLoading ? <span>Signing in...</span> : <span>Continue with this Gmail</span>}
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -261,33 +288,41 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
           </div>
 
           {/* Benefits Info Pill */}
-          <div className="p-3 rounded-2xl bg-amber-50/80 border border-amber-200/60 text-amber-900 text-[11px] flex items-center gap-2.5">
-            <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+          <div className="p-3 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/60 text-amber-900 dark:text-amber-200 text-[11px] flex items-center gap-2.5">
+            <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <span>
-              All Gmail sign-ins receive <strong>100 free loyalty coins</strong> and instant access to live kitchen status.
+              {portal === 'restaurant' ? (
+                <>
+                  Instant access to <strong>Live POS terminal</strong>, <strong>Kitchen KDS</strong>, and <strong>operations analytics</strong>.
+                </>
+              ) : (
+                <>
+                  All Gmail sign-ins receive <strong>100 free loyalty coins</strong> and instant access to live kitchen status.
+                </>
+              )}
             </span>
           </div>
 
           {/* Advanced / Supabase Cloud OAuth Accordion */}
-          <div className="border-t border-stone-200 pt-3">
+          <div className="border-t border-stone-200 dark:border-stone-800 pt-3">
             <button
               type="button"
               onClick={() => setShowOAuthHelp(!showOAuthHelp)}
-              className="w-full flex items-center justify-between text-[11px] font-medium text-stone-500 hover:text-stone-800"
+              className="w-full flex items-center justify-between text-[11px] font-medium text-stone-500 hover:text-stone-800 dark:hover:text-stone-300 cursor-pointer"
             >
               <span className="flex items-center gap-1.5">
                 <HelpCircle className="w-3.5 h-3.5 text-stone-400" />
-                About Live Supabase Google OAuth Provider
+                About Supabase Google OAuth Provider
               </span>
               {showOAuthHelp ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
 
             {showOAuthHelp && (
-              <div className="mt-2.5 p-3 rounded-2xl bg-stone-100 border border-stone-200 text-[11px] text-stone-600 space-y-2">
+              <div className="mt-2.5 p-3 rounded-2xl bg-stone-100 dark:bg-stone-850 border border-stone-200 dark:border-stone-750 text-[11px] text-stone-600 dark:text-stone-400 space-y-2">
                 <p>
                   The Supabase error <em>"Unsupported provider: provider is not enabled"</em> occurs when Google OAuth is not yet toggled on with Client ID/Secret in the Supabase Cloud dashboard.
                 </p>
-                <p className="font-semibold text-stone-800">
+                <p className="font-semibold text-stone-800 dark:text-stone-200">
                   The account buttons above bypass this error and log you in directly via Supabase Auth!
                 </p>
                 <div className="pt-1">
@@ -295,7 +330,7 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
                     type="button"
                     onClick={handleLiveOAuthRedirect}
                     disabled={isLoading}
-                    className="text-[11px] font-bold text-cafe-accent hover:underline flex items-center gap-1"
+                    className="text-[11px] font-bold text-cafe-accent hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <span>Try Supabase Cloud OAuth Redirect &rarr;</span>
                   </button>
@@ -306,16 +341,18 @@ export const GoogleSignInModal: React.FC<GoogleSignInModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3 bg-stone-50 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
+        <div className="px-6 py-3 bg-stone-50 dark:bg-stone-850 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px] text-stone-500">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
             <span>Encrypted Supabase Auth</span>
           </div>
-          <span className="text-stone-400">CaféOS Dining v2.6</span>
+          <span className="text-stone-400">
+            {portal === 'restaurant' ? 'CaféOS Operations v2.6' : 'CaféOS Dining v2.6'}
+          </span>
         </div>
       </div>
     </div>
   );
 };
-export default GoogleSignInModal;
 
+export default GoogleSignInModal;

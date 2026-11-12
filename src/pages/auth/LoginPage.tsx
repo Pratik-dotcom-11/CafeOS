@@ -17,6 +17,7 @@ import { useCafe } from '../../context/CafeContext';
 import { useAuth } from '../../context/AuthContext';
 import { CafeLogo } from '../../components/common/CafeLogo';
 import { validateSafeRedirect } from '../../utils/securityUtils';
+import { GoogleSignInModal } from '../../components/customer/GoogleSignInModal';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export const LoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,18 +55,9 @@ export const LoginPage: React.FC = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true);
+  const handleGoogleSignIn = () => {
     setErrorMessage(null);
-    try {
-      const rawRedirect = (location.state as any)?.from?.pathname || '/dashboard';
-      const safeRedirect = validateSafeRedirect(rawRedirect, '/dashboard');
-      await signInWithGoogle('restaurant', safeRedirect);
-    } catch (err: any) {
-      console.error('Restaurant Google sign-in exception:', err);
-      setErrorMessage(err.message || 'Google authentication encountered an issue.');
-      setIsLoading(false);
-    }
+    setIsGoogleModalOpen(true);
   };
 
   const handleQuickDemo = async (role: 'owner' | 'kds' | 'superadmin') => {
@@ -278,6 +271,14 @@ export const LoginPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Google Account Sign-In Modal for Staff & Owners */}
+      <GoogleSignInModal
+        isOpen={isGoogleModalOpen}
+        onClose={() => setIsGoogleModalOpen(false)}
+        portal="restaurant"
+        redirectUrl={validateSafeRedirect((location.state as any)?.from?.pathname || '/dashboard', '/dashboard')}
+      />
     </div>
   );
 };

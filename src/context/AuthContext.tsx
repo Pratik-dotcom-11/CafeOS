@@ -32,7 +32,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName?: string, phone?: string) => Promise<any>;
   signIn: (email: string, password: string) => Promise<any>;
   signInWithGoogle: (portalOrUrl?: 'customer' | 'restaurant' | string, redirectToPath?: string) => Promise<any>;
-  signInWithGmail: (email: string, fullName?: string, phone?: string) => Promise<any>;
+  signInWithGmail: (email: string, fullName?: string, phone?: string, portal?: 'customer' | 'restaurant') => Promise<any>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<any>;
   switchWorkspace: (restaurantId: string) => void;
@@ -239,18 +239,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return authService.signInWithGoogle(portalOrUrl, redirectToPath);
   };
 
-  // Sign In or Register directly with Gmail account (Customer Portal)
-  const signInWithGmail = async (email: string, fullName?: string, phone?: string) => {
+  // Sign In or Register directly with Gmail account (Customer & Restaurant Portals)
+  const signInWithGmail = async (email: string, fullName?: string, phone?: string, portal: 'customer' | 'restaurant' = 'customer') => {
     setIsLoading(true);
     try {
-      const data = await authService.signInWithGmail(email, fullName, phone);
+      const data = await authService.signInWithGmail(email, fullName, phone, portal);
       if (data?.session) {
         setSession(data.session);
         setUser(data.user);
-        await Promise.all([
+        const [_, ws] = await Promise.all([
           loadProfile(data.user.id),
           loadWorkspaces(data.user.id),
         ]);
+        if (ws && Array.isArray(ws)) {
+          syncActiveWorkspace(ws);
+        }
       }
       return data;
     } finally {
